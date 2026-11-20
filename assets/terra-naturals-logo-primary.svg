@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Terra Naturals Primary Logo">
+  <title>Terra Naturals — Primary Logo</title>
+  <defs>
+    <clipPath id="tn-top-half">
+      <rect x="0" y="0" width="600" height="252"/>
+    </clipPath>
+    <clipPath id="tn-bottom-half">
+      <rect x="0" y="348" width="600" height="252"/>
+    </clipPath>
+    <mask id="tn-top-mask">
+      <rect width="600" height="600" fill="white"/>
+      <!-- Top graceful leaf rising from horizontal band -->
+      <path d="M126 254 C196 254 238 232 252 184 C260 156 286 130 330 120 C362 113 386 102 402 88 C406 146 378 202 332 224 C306 236 276 234 256 226 C268 194 300 164 344 146 C300 154 268 178 248 214 C236 236 216 248 188 254 Z" fill="black"/>
+    </mask>
+    <mask id="tn-bottom-mask">
+      <rect width="600" height="600" fill="white"/>
+      <!-- Bottom mirrored leaf descending from horizontal band -->
+      <path d="M474 346 C404 346 362 368 348 416 C340 444 314 470 270 480 C238 487 214 498 198 512 C194 454 222 398 268 376 C294 364 324 366 344 374 C332 406 300 436 256 454 C300 446 332 422 352 386 C364 364 384 352 412 346 Z" fill="black"/>
+    </mask>
+  </defs>
+
+  <!-- Upper semicircle with leaf cutout -->
+  <circle cx="300" cy="300" r="240" fill="#1A4D3A" clip-path="url(#tn-top-half)" mask="url(#tn-top-mask)"/>
+  <!-- Lower semicircle with leaf cutout -->
+  <circle cx="300" cy="300" r="240" fill="#1A4D3A" clip-path="url(#tn-bottom-half)" mask="url(#tn-bottom-mask)"/>
+
+  <!-- Framing rule lines -->
+  <rect x="44" y="247" width="512" height="7" rx="3.5" fill="#1A4D3A" mask="url(#tn-top-mask)"/>
+  <rect x="44" y="346" width="512" height="7" rx="3.5" fill="#1A4D3A" mask="url(#tn-bottom-mask)"/>
+
+  <!-- Wordmark -->
+  <text x="300" y="317" text-anchor="middle" fill="#1A4D3A" font-family="'Montserrat', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="52" letter-spacing="4.2">TERRA NATURALS</text>
+</svg>

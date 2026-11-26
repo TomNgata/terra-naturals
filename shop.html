@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Raw Materials Shop | Terra Naturals Kenya</title>
-  <meta name="description" content="Shop 79+ cosmetic raw materials in Kenya: shea and mango butters, Olivem 1000, BTMS-50, Geogard ECT, waxes, clays, oils, and surfactants.">
+  <title>Shop Cosmetic Raw Materials | Terra Naturals Kenya</title>
+  <meta name="description" content="Shop 30+ stocked cosmetic raw materials across 8 categories in Kenya: shea and mango butters, carrier and essential oils, Olivem 1000, BTMS-50, preservatives, clays, and packaging.">
   <link rel="icon" type="image/svg+xml" href="assets/terra-naturals-logo-primary.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,7 +22,7 @@
 
       <nav class="nav-links" aria-label="Primary Navigation">
         <a href="index.html">Home</a>
-        <a href="shop.html" class="active">Raw Materials</a>
+        <a href="shop.html" class="active">Shop</a>
         <a href="consultancy.html">Consultancy</a>
         <a href="workshops.html">Workshops</a>
         <a href="inci-library.html">INCI Library</a>
@@ -51,7 +51,7 @@
       <div class="container">
         <nav class="mobile-nav-links" aria-label="Mobile Navigation">
           <a href="index.html">Home</a>
-          <a href="shop.html" class="active">Raw Materials</a>
+          <a href="shop.html" class="active">Shop Raw Materials</a>
           <a href="consultancy.html">Consultancy</a>
           <a href="workshops.html">Workshops &amp; NGO</a>
           <a href="inci-library.html">INCI Library</a>
@@ -75,52 +75,108 @@
         <div class="breadcrumb">
           <a href="index.html">Home</a>
           <span>/</span>
-          <span>Raw Materials</span>
+          <span>Shop</span>
         </div>
-        <h1>Cosmetic <span>Raw Materials.</span></h1>
-        <p class="page-hero-lead">79+ stocked SKUs shipped nationwide across Kenya via M-Pesa or COD.</p>
+        <h1>Shop Cosmetic <span>Raw Materials.</span></h1>
+        <p class="page-hero-lead">Filter by category, grade, application, or INCI. M-Pesa and COD delivery across Kenya.</p>
       </div>
     </section>
 
     <section class="band">
-      <div class="container">
-        <div class="catalog-toolbar">
-          <div class="filter-pills" id="categoryFilters" role="tablist" aria-label="Filter by category">
-            <button type="button" class="filter-btn active" data-cat="All">All (18)</button>
-            <button type="button" class="filter-btn" data-cat="Butters">Butters</button>
-            <button type="button" class="filter-btn" data-cat="Emulsifiers">Emulsifiers</button>
-            <button type="button" class="filter-btn" data-cat="Waxes & Clays">Waxes &amp; Clays</button>
-            <button type="button" class="filter-btn" data-cat="Preservatives & Actives">Preservatives</button>
-            <button type="button" class="filter-btn" data-cat="Carrier & Essential Oils">Oils</button>
-            <button type="button" class="filter-btn" data-cat="Surfactants & Packaging">Surfactants</button>
-          </div>
-
-          <div class="search-controls">
-            <div class="search-box">
-              <span class="search-icon" aria-hidden="true">&#128269;</span>
-              <input type="search" id="productSearch" placeholder="Search name or INCI…" aria-label="Search ingredients">
+      <div class="container shop-layout">
+        <!-- E-Commerce Filter Sidebar -->
+        <aside class="shop-sidebar" id="shopSidebar" aria-label="Product Filters">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <strong style="font-family:var(--font-display);font-size:0.95rem;color:var(--forest-deep);">Filters</strong>
+            <div style="display:flex;gap:0.5rem;align-items:center;">
+              <button type="button" id="clearAllFiltersBtn" style="border:0;background:none;color:var(--forest);font-size:0.78rem;font-weight:700;cursor:pointer;text-decoration:underline;padding:0;">Reset</button>
+              <button type="button" class="btn btn-soft btn-sm sidebar-close-btn" id="closeFiltersBtn">Done</button>
             </div>
-            <select id="productSort" class="sort-select" aria-label="Sort products">
-              <option value="featured">Featured</option>
-              <option value="price-asc">Price: Low–High</option>
-              <option value="price-desc">Price: High–Low</option>
-            </select>
           </div>
+
+          <!-- Categories -->
+          <div class="filter-group">
+            <div class="filter-group-head">
+              <h3>Categories</h3>
+            </div>
+            <ul class="cat-filter-list" id="shopCategoryList"></ul>
+          </div>
+
+          <!-- Max Starting Price -->
+          <div class="filter-group">
+            <div class="filter-group-head">
+              <h3>Starting Pack Price</h3>
+            </div>
+            <div class="price-range-meta">
+              <span style="color:var(--muted);">KES 500</span>
+              <strong style="color:var(--forest);" id="maxPriceLabel">All Prices</strong>
+            </div>
+            <input type="range" id="maxPriceRange" class="price-range-input" min="500" max="3000" step="100" value="3000" aria-label="Maximum starting price">
+          </div>
+
+          <!-- Formulation Use -->
+          <div class="filter-group">
+            <div class="filter-group-head">
+              <h3>Application</h3>
+            </div>
+            <div class="check-filter-list">
+              <label class="check-filter-label"><input type="checkbox" class="js-use-filter" value="Skincare"> Skincare</label>
+              <label class="check-filter-label"><input type="checkbox" class="js-use-filter" value="Haircare"> Haircare</label>
+              <label class="check-filter-label"><input type="checkbox" class="js-use-filter" value="Balms & Butters"> Balms &amp; Butters</label>
+              <label class="check-filter-label"><input type="checkbox" class="js-use-filter" value="Packaging"> Packaging</label>
+            </div>
+          </div>
+
+          <!-- Grade & Bulk -->
+          <div class="filter-group">
+            <div class="filter-group-head">
+              <h3>Grade &amp; Pack</h3>
+            </div>
+            <div class="check-filter-list">
+              <label class="check-filter-label"><input type="checkbox" class="js-grade-filter" value="ECOCERT / Natural"> ECOCERT / Natural</label>
+              <label class="check-filter-label"><input type="checkbox" class="js-grade-filter" value="Unrefined"> Unrefined / Cold-Pressed</label>
+              <label class="check-filter-label"><input type="checkbox" class="js-grade-filter" value="Cosmetic Grade"> Cosmetic Grade</label>
+              <label class="check-filter-label"><input type="checkbox" id="bulkOnlyFilter"> 1kg / Bulk Available</label>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Main Storefront Catalog -->
+        <div>
+          <div class="shop-topbar">
+            <div class="shop-topbar-left">
+              <button type="button" class="btn btn-outline btn-sm mobile-filter-btn" id="openFiltersBtn">Filters</button>
+              <div class="search-box">
+                <span class="search-icon" aria-hidden="true">&#128269;</span>
+                <input type="search" id="productSearch" placeholder="Search name, INCI, or SKU…" aria-label="Search ingredients">
+              </div>
+            </div>
+
+            <div style="display:flex;align-items:center;gap:0.75rem;">
+              <span id="catalogCountLabel" style="font-size:0.82rem;color:var(--muted);font-variant-numeric:tabular-nums;">Showing 30 items</span>
+              <select id="productSort" class="sort-select" aria-label="Sort products">
+                <option value="featured">Sort: Featured</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Name: A to Z</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="active-filters-bar" id="activeFiltersBar" aria-live="polite"></div>
+
+          <div class="shop-grid" id="productsGrid"></div>
         </div>
-
-        <p id="catalogCountLabel" style="font-size:0.82rem;color:var(--muted);margin:0 0 1.2rem;"></p>
-
-        <div class="products-grid" id="productsGrid"></div>
       </div>
     </section>
 
+    <!-- Wholesale & 17-Category Directory -->
     <section class="band alt">
       <div class="container">
         <div class="section-head">
-          <h2>All 17 Stocked Categories</h2>
-          <a href="contact.html" class="link-subtle">Bulk / 5kg+ quotes →</a>
+          <h2>All 17 Nairobi Stock Categories</h2>
+          <a href="contact.html" class="link-subtle">Bulk 5kg+ wholesale quote →</a>
         </div>
-
         <div class="category-cloud">
           <span class="cat-chip">Butters</span>
           <span class="cat-chip">Carrier Oils</span>
@@ -160,7 +216,7 @@
         <div>
           <h4>Explore</h4>
           <ul>
-            <li><a href="shop.html">Raw Materials</a></li>
+            <li><a href="shop.html">Shop Raw Materials</a></li>
             <li><a href="consultancy.html">Consultancy</a></li>
             <li><a href="workshops.html">Workshops &amp; NGO</a></li>
             <li><a href="inci-library.html">INCI Library</a></li>
@@ -193,19 +249,93 @@
     </div>
   </footer>
 
+  <!-- Product Quick View Modal -->
+  <div class="qv-backdrop" id="quickViewBackdrop" role="dialog" aria-modal="true" aria-labelledby="quickViewTitle">
+    <div class="qv-modal">
+      <div class="qv-head">
+        <div>
+          <h3 id="quickViewTitle" style="font-family:var(--font-display);margin:0;color:var(--forest-deep);font-size:1.12rem;">Product Details</h3>
+          <div id="quickViewMeta" style="font-size:0.78rem;color:var(--muted);margin-top:0.2rem;"></div>
+        </div>
+        <button type="button" class="btn btn-soft btn-sm" id="closeQuickViewBtn" aria-label="Close">Close</button>
+      </div>
+      <div class="qv-body" id="quickViewContent"></div>
+    </div>
+  </div>
+
+  <!-- E-Commerce Order Bag & Checkout Drawer -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Order Bag">
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Order Bag and Checkout">
     <div class="drawer-head">
-      <h3>Order Bag</h3>
+      <h3 id="drawerHeading">Order Bag</h3>
       <button type="button" class="btn btn-soft btn-sm" id="closeCartBtn">Close</button>
     </div>
+
+    <!-- Step 1: Bag Items -->
     <div class="drawer-body" id="cartItems"></div>
-    <div class="drawer-foot">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem;">
-        <span style="font-weight:600;color:var(--muted);">Subtotal</span>
-        <strong style="font-family:var(--font-display);font-size:1.2rem;color:var(--forest);" id="cartTotal">KES 0</strong>
+
+    <div class="drawer-foot" id="drawerFoot">
+      <div class="free-ship-note" id="freeShipNote" style="display:none;"></div>
+
+      <div class="delivery-select-box">
+        <label for="deliveryZoneSelect">Kenya Delivery Method</label>
+        <select id="deliveryZoneSelect">
+          <option value="pickup">Kiambu Road Studio Pickup (KES 0)</option>
+          <option value="nairobi" selected>Nairobi Metro Courier (KES 350 · Free KES 10k+)</option>
+          <option value="county">47-County Overnight Parcel (KES 600)</option>
+        </select>
       </div>
-      <button type="button" class="btn btn-primary" id="checkoutWhatsappBtn" style="width:100%;">Order via WhatsApp</button>
+
+      <div class="totals-stack">
+        <div class="totals-line">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">KES 0</span>
+        </div>
+        <div class="totals-line">
+          <span>Delivery</span>
+          <span id="cartShipping">KES 0</span>
+        </div>
+        <div class="totals-line grand">
+          <span>Total</span>
+          <span id="cartTotal">KES 0</span>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:0.5rem;">
+        <button type="button" class="btn btn-primary" id="proceedCheckoutBtn" style="width:100%;">Proceed to Checkout</button>
+        <button type="button" class="btn btn-outline btn-sm" id="checkoutWhatsappBtn" style="width:100%;">Quick WhatsApp Order</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Checkout Details & Receipt -->
+    <div class="checkout-panel" id="checkoutPanel">
+      <button type="button" class="btn btn-soft btn-sm" id="backToBagBtn" style="margin-bottom:0.9rem;">← Back to Bag</button>
+      <div id="checkoutSummaryLine" style="font-size:0.82rem;font-weight:700;color:var(--forest);background:var(--sage);padding:0.65rem 0.85rem;border-radius:8px;margin-bottom:1rem;font-variant-numeric:tabular-nums;"></div>
+
+      <div class="confirmation-box" id="checkoutReceipt" role="status" aria-live="polite"></div>
+
+      <form id="checkoutForm" class="form-grid">
+        <div class="field">
+          <label for="coName">Full Name</label>
+          <input type="text" id="coName" required placeholder="Wanjiku Kamau">
+        </div>
+        <div class="field">
+          <label for="coPhone">Phone / M-Pesa Number</label>
+          <input type="tel" id="coPhone" required placeholder="+254 7XX XXX XXX">
+        </div>
+        <div class="field">
+          <label for="coLocation">Delivery Estate / Town</label>
+          <input type="text" id="coLocation" required placeholder="Westlands, Nairobi / Nakuru">
+        </div>
+        <div class="field">
+          <label for="coPayment">Payment Method</label>
+          <select id="coPayment">
+            <option value="M-Pesa Paybill / Till">M-Pesa Paybill / Till</option>
+            <option value="Cash on Delivery (Nairobi)">Cash on Delivery (Nairobi)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Place Order</button>
+      </form>
     </div>
   </aside>
 

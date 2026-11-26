@@ -1,12 +1,27 @@
 const CART_STORAGE_KEY = "tn_order_bag_v2";
+const DELIVERY_STORAGE_KEY = "tn_delivery_zone_v1";
+const FREE_NAIROBI_THRESHOLD = 10000;
+
+const DELIVERY_ZONES = {
+  pickup: { label: "Kiambu Road Studio Pickup", fee: 0 },
+  nairobi: { label: "Nairobi Metro Courier", fee: 350 },
+  county: { label: "47-County Overnight Parcel", fee: 600 }
+};
 
 const PRODUCTS = [
   {
     id: "shea-ghana",
+    sku: "TN-BTR-01",
     name: "Ghanaian Unrefined Shea Butter",
     category: "Butters",
+    tone: "tone-butters",
     inci: "Butyrospermum Parkii Butter",
-    desc: "Rich emollient butter for whipped body butters and balms.",
+    desc: "Rich West African butter for whipped body butters and balms.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Balms & Butters"],
+    phase: "Oil Phase (32–40°C)",
+    usage: "2% – 100%",
+    badge: "Bestseller",
     featured: true,
     packs: [
       { label: "500g", price: 1000 },
@@ -16,10 +31,16 @@ const PRODUCTS = [
   },
   {
     id: "shea-nilotica",
+    sku: "TN-BTR-02",
     name: "East African Nilotica Shea Butter",
     category: "Butters",
+    tone: "tone-butters",
     inci: "Vitellaria Nilotica Seed Butter",
     desc: "Soft-melting East African shea for lightweight facial balms.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Balms & Butters"],
+    phase: "Oil Phase (25–30°C)",
+    usage: "2% – 100%",
     packs: [
       { label: "250g", price: 850 },
       { label: "500g", price: 1600 },
@@ -28,10 +49,16 @@ const PRODUCTS = [
   },
   {
     id: "mango-butter",
+    sku: "TN-BTR-03",
     name: "Cosmetic-Grade Mango Butter",
     category: "Butters",
+    tone: "tone-butters",
     inci: "Mangifera Indica Seed Butter",
-    desc: "Lightweight kernel butter that boosts elasticity cleanly.",
+    desc: "Lightweight kernel butter boosting skin elasticity cleanly.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Balms & Butters"],
+    phase: "Oil Phase",
+    usage: "2% – 80%",
     featured: true,
     packs: [
       { label: "500g", price: 2350 },
@@ -40,10 +67,16 @@ const PRODUCTS = [
   },
   {
     id: "cocoa-butter",
+    sku: "TN-BTR-04",
     name: "Natural Cocoa Butter",
     category: "Butters",
+    tone: "tone-butters",
     inci: "Theobroma Cacao Seed Butter",
-    desc: "Firm protective lipid adding structure to bars and balms.",
+    desc: "Firm protective lipid adding structure to body bars and balms.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Balms & Butters"],
+    phase: "Oil Phase",
+    usage: "2% – 50%",
     packs: [
       { label: "250g", price: 1150 },
       { label: "500g", price: 2150 },
@@ -51,11 +84,139 @@ const PRODUCTS = [
     ]
   },
   {
+    id: "avocado-oil",
+    sku: "TN-OIL-01",
+    name: "Cold-Pressed Avocado Oil",
+    category: "Carrier Oils",
+    tone: "tone-oils",
+    inci: "Persea Gratissima Oil",
+    desc: "Kenyan vitamin-rich carrier oil for dry skin and hair care.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Oil / Cool-Down",
+    usage: "1% – 100%",
+    badge: "Kenyan Sourced",
+    packs: [
+      { label: "250ml", price: 550 },
+      { label: "1L", price: 2200 },
+      { label: "5L", price: 9500 }
+    ]
+  },
+  {
+    id: "sweet-almond-oil",
+    sku: "TN-OIL-02",
+    name: "Sweet Almond Carrier Oil",
+    category: "Carrier Oils",
+    tone: "tone-oils",
+    inci: "Prunus Amygdalus Dulcis Oil",
+    desc: "Fast-absorbing emollient oil ideal for baby lotions and massage.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Oil Phase",
+    usage: "1% – 100%",
+    packs: [
+      { label: "250ml", price: 950 },
+      { label: "1L", price: 3400 }
+    ]
+  },
+  {
+    id: "jojoba-oil",
+    sku: "TN-OIL-03",
+    name: "Golden Jojoba Oil",
+    category: "Carrier Oils",
+    tone: "tone-oils",
+    inci: "Simmondsia Chinensis Seed Oil",
+    desc: "Sebum-mimicking liquid wax ester for facial serums and scalp oils.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Oil / Cool-Down",
+    usage: "1% – 100%",
+    packs: [
+      { label: "100ml", price: 1200 },
+      { label: "500ml", price: 4800 }
+    ]
+  },
+  {
+    id: "baobab-oil",
+    sku: "TN-OIL-04",
+    name: "Cold-Pressed Baobab Oil",
+    category: "Carrier Oils",
+    tone: "tone-oils",
+    inci: "Adansonia Digitata Seed Oil",
+    desc: "Omega-rich African botanical oil supporting barrier repair.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Oil / Cool-Down",
+    usage: "2% – 100%",
+    packs: [
+      { label: "250ml", price: 1450 },
+      { label: "1L", price: 4900 }
+    ]
+  },
+  {
+    id: "tea-tree-eo",
+    sku: "TN-ESS-01",
+    name: "Tea Tree Essential Oil",
+    category: "Essential Oils",
+    tone: "tone-essential",
+    inci: "Melaleuca Alternifolia Leaf Oil",
+    desc: "Steam-distilled purifying oil for blemish washes and scalp care.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Cool-Down (<40°C)",
+    usage: "0.2% – 1.0%",
+    packs: [
+      { label: "30ml", price: 750 },
+      { label: "100ml", price: 1950 }
+    ]
+  },
+  {
+    id: "lavender-eo",
+    sku: "TN-ESS-02",
+    name: "Lavender Angustifolia Essential Oil",
+    category: "Essential Oils",
+    tone: "tone-essential",
+    inci: "Lavandula Angustifolia Oil",
+    desc: "Calming floral essential oil suited for creams, balms, and soaps.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Balms & Butters"],
+    phase: "Cool-Down (<40°C)",
+    usage: "0.2% – 1.0%",
+    packs: [
+      { label: "30ml", price: 850 },
+      { label: "100ml", price: 2250 }
+    ]
+  },
+  {
+    id: "peppermint-eo",
+    sku: "TN-ESS-03",
+    name: "Peppermint Essential Oil",
+    category: "Essential Oils",
+    tone: "tone-essential",
+    inci: "Mentha Piperita Oil",
+    desc: "Cooling botanical oil popular in scalp serums and foot balms.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Haircare", "Balms & Butters"],
+    phase: "Cool-Down (<40°C)",
+    usage: "0.1% – 0.8%",
+    packs: [
+      { label: "30ml", price: 700 },
+      { label: "100ml", price: 1850 }
+    ]
+  },
+  {
     id: "olivem-1000",
+    sku: "TN-EMU-01",
     name: "Olivem 1000 Emulsifier",
     category: "Emulsifiers",
+    tone: "tone-emulsifiers",
     inci: "Cetearyl Olivate, Sorbitan Olivate",
     desc: "PEG-free olive emulsifier for silky liquid-crystal lotions.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare"],
+    phase: "Oil / Water · pH 3–12",
+    usage: "3% – 8%",
+    badge: "Bestseller",
     featured: true,
     packs: [
       { label: "100g", price: 1250 },
@@ -64,10 +225,17 @@ const PRODUCTS = [
   },
   {
     id: "btms-50",
+    sku: "TN-EMU-02",
     name: "BTMS-50 Conditioning Emulsifier",
     category: "Emulsifiers",
+    tone: "tone-emulsifiers",
     inci: "Behentrimonium Methosulfate, Cetyl Alcohol",
-    desc: "High-slip conditioning emulsifier for hair masks and leave-ins.",
+    desc: "High-slip cationic emulsifier for hair masks and leave-ins.",
+    grade: "Cosmetic Grade",
+    useFor: ["Haircare"],
+    phase: "Oil Phase (75°C)",
+    usage: "2% – 10%",
+    badge: "Haircare Pro",
     packs: [
       { label: "100g", price: 1300 },
       { label: "500g", price: 4450 }
@@ -75,10 +243,16 @@ const PRODUCTS = [
   },
   {
     id: "arlacel-165",
+    sku: "TN-EMU-03",
     name: "Arlacel / Lotionpro 165",
     category: "Emulsifiers",
+    tone: "tone-emulsifiers",
     inci: "Glyceryl Stearate, PEG-100 Stearate",
-    desc: "Non-ionic O/W emulsifier tolerant of wide pH and actives.",
+    desc: "Electrolyte-tolerant O/W emulsifier for active facial creams.",
+    grade: "Cosmetic Grade",
+    useFor: ["Skincare"],
+    phase: "Oil Phase · pH 4–9",
+    usage: "2% – 6%",
     packs: [
       { label: "100g", price: 750 },
       { label: "500g", price: 2500 }
@@ -86,21 +260,50 @@ const PRODUCTS = [
   },
   {
     id: "polawax-nf",
+    sku: "TN-EMU-04",
     name: "Polawax Emulsifying Wax NF",
     category: "Emulsifiers",
+    tone: "tone-emulsifiers",
     inci: "Cetearyl Alcohol, Polysorbate 60",
-    desc: "Dependable self-emulsifying wax for stable body lotions.",
+    desc: "Dependable self-emulsifying wax for commercial body lotions.",
+    grade: "Cosmetic Grade",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Oil Phase (70°C)",
+    usage: "3% – 8%",
     packs: [
       { label: "250g", price: 900 },
       { label: "1kg", price: 3200 }
     ]
   },
   {
+    id: "cetyl-alcohol",
+    sku: "TN-EMU-05",
+    name: "Cetyl Alcohol Co-Emulsifier",
+    category: "Emulsifiers",
+    tone: "tone-emulsifiers",
+    inci: "Cetyl Alcohol",
+    desc: "Fatty alcohol thickening and stabilizing creams and conditioners.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Oil Phase (50°C)",
+    usage: "1% – 5%",
+    packs: [
+      { label: "250g", price: 650 },
+      { label: "1kg", price: 2100 }
+    ]
+  },
+  {
     id: "beeswax-yellow",
+    sku: "TN-WAX-01",
     name: "Yellow Beeswax Pellets",
-    category: "Waxes & Clays",
+    category: "Waxes & Thickeners",
+    tone: "tone-waxes",
     inci: "Cera Alba",
     desc: "Triple-filtered golden pastilles for lip balms and salves.",
+    grade: "Unrefined",
+    useFor: ["Balms & Butters", "Skincare"],
+    phase: "Oil Phase (62–65°C)",
+    usage: "2% – 25%",
     packs: [
       { label: "100g", price: 500 },
       { label: "500g", price: 1250 },
@@ -109,21 +312,67 @@ const PRODUCTS = [
   },
   {
     id: "cera-bellina",
+    sku: "TN-WAX-02",
     name: "Cera Bellina Wax",
-    category: "Waxes & Clays",
+    category: "Waxes & Thickeners",
+    tone: "tone-waxes",
     inci: "Polyglyceryl-3 Beeswax",
-    desc: "Prevents graininess in shea balms and creates smooth gels.",
+    desc: "Prevents graininess in shea balms and creates smooth oil gels.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Balms & Butters", "Skincare"],
+    phase: "Oil Phase",
+    usage: "3% – 20%",
     packs: [
       { label: "100g", price: 1350 },
       { label: "500g", price: 4850 }
     ]
   },
   {
+    id: "xanthan-gum",
+    sku: "TN-WAX-03",
+    name: "Cosmetic Xanthan Gum",
+    category: "Waxes & Thickeners",
+    tone: "tone-waxes",
+    inci: "Xanthan Gum",
+    desc: "Natural gum stabilizer preventing emulsion separation.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Glycerin Slurry → Water",
+    usage: "0.2% – 1.0%",
+    packs: [
+      { label: "100g", price: 600 },
+      { label: "500g", price: 2300 }
+    ]
+  },
+  {
+    id: "carbomer-940",
+    sku: "TN-WAX-04",
+    name: "Carbomer 940 Thickener",
+    category: "Waxes & Thickeners",
+    tone: "tone-waxes",
+    inci: "Carbomer",
+    desc: "High-clarity rheology modifier for crystal-clear gels and serums.",
+    grade: "Cosmetic Grade",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Water Phase (Neutralize)",
+    usage: "0.2% – 1.0%",
+    packs: [
+      { label: "100g", price: 700 },
+      { label: "1kg", price: 5500 }
+    ]
+  },
+  {
     id: "bentonite-clay",
+    sku: "TN-CLY-01",
     name: "Montmorillonite Bentonite Clay",
-    category: "Waxes & Clays",
+    category: "Clays & Exfoliants",
+    tone: "tone-clays",
     inci: "Bentonite",
-    desc: "Volcanic detox clay for clarifying masks and scalp care.",
+    desc: "Volcanic detox clay for clarifying masks and scalp cleansers.",
+    grade: "Unrefined",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Powder Phase",
+    usage: "5% – 30%",
     packs: [
       { label: "250g", price: 700 },
       { label: "1kg", price: 2450 }
@@ -131,21 +380,51 @@ const PRODUCTS = [
   },
   {
     id: "kaolin-clay",
+    sku: "TN-CLY-02",
     name: "White Kaolin Clay",
-    category: "Waxes & Clays",
+    category: "Clays & Exfoliants",
+    tone: "tone-clays",
     inci: "Kaolin",
-    desc: "Fine mineral clay for sensitive facial masks and cleansers.",
+    desc: "Ultra-fine gentle mineral clay for sensitive facial masks.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare"],
+    phase: "Powder Phase",
+    usage: "5% – 40%",
     packs: [
       { label: "250g", price: 650 },
       { label: "1kg", price: 2100 }
     ]
   },
   {
+    id: "bamboo-exfoliant",
+    sku: "TN-CLY-03",
+    name: "Bamboo Stem Exfoliating Powder",
+    category: "Clays & Exfoliants",
+    tone: "tone-clays",
+    inci: "Bambusa Arundinacea Stem Powder",
+    desc: "Smooth micro-polished natural exfoliant for gentle facial scrubs.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare"],
+    phase: "Cool-Down / Scrub Base",
+    usage: "1% – 5%",
+    packs: [
+      { label: "100g", price: 850 },
+      { label: "500g", price: 3100 }
+    ]
+  },
+  {
     id: "geogard-ect",
+    sku: "TN-ACT-01",
     name: "Preservative ECO (Geogard ECT)",
     category: "Preservatives & Actives",
+    tone: "tone-actives",
     inci: "Benzyl Alcohol, Salicylic Acid, Glycerin, Sorbic Acid",
     desc: "ECOCERT broad-spectrum preservative for aqueous skincare.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Cool-Down (<40°C) · pH 3–8",
+    usage: "0.6% – 1.0%",
+    badge: "ECOCERT",
     featured: true,
     packs: [
       { label: "100ml", price: 1450 },
@@ -154,56 +433,104 @@ const PRODUCTS = [
   },
   {
     id: "allantoin",
+    sku: "TN-ACT-02",
     name: "Allantoin Powder",
     category: "Preservatives & Actives",
+    tone: "tone-actives",
     inci: "Allantoin",
     desc: "Soothing skin active supporting barrier recovery in creams.",
+    grade: "Cosmetic Grade",
+    useFor: ["Skincare"],
+    phase: "Water Phase (Warm)",
+    usage: "0.1% – 0.5%",
     packs: [
       { label: "100g", price: 1350 }
     ]
   },
   {
-    id: "carbomer-940",
-    name: "Carbomer 940 Thickener",
+    id: "vitamin-e",
+    sku: "TN-ACT-03",
+    name: "Vitamin E (Mixed Tocopherols)",
     category: "Preservatives & Actives",
-    inci: "Carbomer",
-    desc: "High-clarity rheology modifier for clear gels and serums.",
+    tone: "tone-actives",
+    inci: "Tocopherol",
+    desc: "Oil-soluble antioxidant extending shelf life of oils and balms.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Balms & Butters"],
+    phase: "Cool-Down (<40°C)",
+    usage: "0.2% – 1.0%",
     packs: [
-      { label: "100g", price: 700 },
-      { label: "1kg", price: 5500 }
+      { label: "50ml", price: 950 },
+      { label: "250ml", price: 3600 }
     ]
   },
   {
-    id: "xanthan-gum",
-    name: "Cosmetic Xanthan Gum",
+    id: "veg-glycerin",
+    sku: "TN-ACT-04",
+    name: "Vegetable Glycerin (USP Grade)",
     category: "Preservatives & Actives",
-    inci: "Xanthan Gum",
-    desc: "Natural gum stabilizer preventing emulsion separation.",
+    tone: "tone-actives",
+    inci: "Glycerin",
+    desc: "Plant-derived humectant drawing moisture into skin and hair.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Water Phase",
+    usage: "1% – 5%",
     packs: [
-      { label: "100g", price: 600 },
-      { label: "500g", price: 2300 }
-    ]
-  },
-  {
-    id: "avocado-oil",
-    name: "Cold-Pressed Avocado Oil",
-    category: "Carrier & Essential Oils",
-    inci: "Persea Gratissima Oil",
-    desc: "Kenyan vitamin-rich carrier oil for skin and hair care.",
-    packs: [
-      { label: "250ml", price: 550 },
-      { label: "1L", price: 2200 }
+      { label: "500ml", price: 550 },
+      { label: "1L", price: 950 },
+      { label: "5L", price: 3900 }
     ]
   },
   {
     id: "coco-glucoside",
-    name: "Coco Glucoside Surfactant",
+    sku: "TN-PKG-01",
+    name: "Coco Glucoside Mild Surfactant",
     category: "Surfactants & Packaging",
+    tone: "tone-packaging",
     inci: "Coco-Glucoside",
-    desc: "Plant-derived sulfate-free surfactant for mild washes.",
+    desc: "Plant-derived sulfate-free surfactant for gentle facial washes.",
+    grade: "ECOCERT / Natural",
+    useFor: ["Skincare", "Haircare"],
+    phase: "Water Phase · pH 4.5–6.5",
+    usage: "5% – 25%",
     packs: [
       { label: "250ml", price: 850 },
       { label: "1L", price: 2900 }
+    ]
+  },
+  {
+    id: "amber-droppers",
+    sku: "TN-PKG-02",
+    name: "50ml Amber Glass Dropper Bottles",
+    category: "Surfactants & Packaging",
+    tone: "tone-packaging",
+    inci: "UV-Protective Cosmetic Glass",
+    desc: "Refillable UV-shielding serum bottles with glass pipettes.",
+    grade: "Cosmetic Grade",
+    useFor: ["Packaging"],
+    phase: "Finished Packaging",
+    usage: "Serums & Oils",
+    packs: [
+      { label: "12-Pack", price: 1440 },
+      { label: "24-Pack", price: 2650 }
+    ]
+  },
+  {
+    id: "frosted-jars",
+    sku: "TN-PKG-03",
+    name: "250g Double-Wall Cream Jars",
+    category: "Surfactants & Packaging",
+    tone: "tone-packaging",
+    inci: "BPA-Free Cosmetic PP Jar",
+    desc: "Sturdy retail jars with inner shive lids for body butters.",
+    grade: "Cosmetic Grade",
+    useFor: ["Packaging"],
+    phase: "Finished Packaging",
+    usage: "Butters & Creams",
+    packs: [
+      { label: "12-Pack", price: 1680 },
+      { label: "24-Pack", price: 3100 }
     ]
   }
 ];
@@ -220,8 +547,8 @@ const INCI_DATA = [
   { common: "Polawax NF", inci: "Cetearyl Alcohol, Polysorbate 60", group: "Emulsifiers", fn: "Self-emulsifying wax for stable commercial lotions.", phase: "Oil Phase · 70°C", usage: "3% – 8%", shopSearch: "Polawax" },
   { common: "Preservative ECO (Geogard ECT)", inci: "Benzyl Alcohol, Salicylic Acid, Glycerin, Sorbic Acid", group: "Preservatives & Actives", fn: "ECOCERT broad-spectrum preservative for aqueous formulas.", phase: "Cool-Down (<40°C) · pH 3–8", usage: "0.6% – 1.0%", shopSearch: "Geogard" },
   { common: "Allantoin Powder", inci: "Allantoin", group: "Preservatives & Actives", fn: "Soothing anti-irritant active for barrier repair.", phase: "Water Phase (Warm)", usage: "0.1% – 0.5%", shopSearch: "Allantoin" },
-  { common: "Vegetable Glycerin", inci: "Glycerin", group: "Preservatives & Actives", fn: "Plant humectant drawing moisture into the epidermis.", phase: "Water Phase", usage: "1% – 5%", shopSearch: "" },
-  { common: "Vitamin E (Tocopherol)", inci: "Tocopherol", group: "Preservatives & Actives", fn: "Oil-soluble antioxidant slowing oil rancidity.", phase: "Cool-Down (<40°C)", usage: "0.2% – 1.0%", shopSearch: "" },
+  { common: "Vegetable Glycerin", inci: "Glycerin", group: "Preservatives & Actives", fn: "Plant humectant drawing moisture into the epidermis.", phase: "Water Phase", usage: "1% – 5%", shopSearch: "Glycerin" },
+  { common: "Vitamin E (Tocopherol)", inci: "Tocopherol", group: "Preservatives & Actives", fn: "Oil-soluble antioxidant slowing oil rancidity.", phase: "Cool-Down (<40°C)", usage: "0.2% – 1.0%", shopSearch: "Vitamin E" },
   { common: "Yellow Beeswax Pellets", inci: "Cera Alba", group: "Waxes, Clays & Surfactants", fn: "Natural hardening wax for salves and lip balms.", phase: "Oil Phase · 62–65°C", usage: "2% – 25%", shopSearch: "Beeswax" },
   { common: "Cera Bellina Wax", inci: "Polyglyceryl-3 Beeswax", group: "Waxes, Clays & Surfactants", fn: "Prevents graininess in shea balms and oil gels.", phase: "Oil Phase", usage: "3% – 20%", shopSearch: "Cera Bellina" },
   { common: "Xanthan Gum", inci: "Xanthan Gum", group: "Waxes, Clays & Surfactants", fn: "Natural thickener, gel former, and emulsion stabilizer.", phase: "Glycerin Slurry → Water", usage: "0.2% – 1.0%", shopSearch: "Xanthan Gum" },
@@ -259,7 +586,7 @@ function showToast(msg) {
   window.__toastTimer = setTimeout(() => toastEl.classList.remove("show"), 3200);
 }
 
-/* Persistent Cart State */
+/* Persistent Cart & Delivery State */
 function loadCart() {
   try {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
@@ -270,28 +597,36 @@ function loadCart() {
   }
 }
 
-function saveCart(cart) {
+function saveCart(items) {
   try {
-    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
+  } catch (e) {}
+}
+
+function loadDeliveryZone() {
+  try {
+    const z = localStorage.getItem(DELIVERY_STORAGE_KEY);
+    return DELIVERY_ZONES[z] ? z : "nairobi";
   } catch (e) {
-    // Ignore storage errors
+    return "nairobi";
   }
 }
 
 let cart = loadCart();
+let deliveryZone = loadDeliveryZone();
 
-function addToCart(product, pack) {
+function addToCart(product, pack, qty = 1) {
   const key = `${product.id}_${pack.label}`;
   const existing = cart.find((item) => item.key === key);
   if (existing) {
-    existing.qty += 1;
+    existing.qty += qty;
   } else {
     cart.push({
       key,
       name: product.name,
       pack: pack.label,
       price: pack.price,
-      qty: 1
+      qty
     });
   }
   saveCart(cart);
@@ -299,16 +634,43 @@ function addToCart(product, pack) {
   showToast(`Added ${product.name} (${pack.label}) to bag`);
 }
 
+function getCartTotals() {
+  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const zoneInfo = DELIVERY_ZONES[deliveryZone] || DELIVERY_ZONES.nairobi;
+  const freeNairobi = deliveryZone === "nairobi" && subtotal >= FREE_NAIROBI_THRESHOLD;
+  const shipping = cart.length === 0 ? 0 : freeNairobi ? 0 : zoneInfo.fee;
+  return { subtotal, shipping, total: subtotal + shipping, zoneLabel: zoneInfo.label, freeNairobi };
+}
+
 function renderCart() {
   const cartCountEls = document.querySelectorAll(".js-cart-count");
   const cartItemsEl = document.getElementById("cartItems");
   const cartTotalEl = document.getElementById("cartTotal");
+  const cartSubEl = document.getElementById("cartSubtotal");
+  const cartShipEl = document.getElementById("cartShipping");
+  const freeShipNoteEl = document.getElementById("freeShipNote");
 
   const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-  const totalAmount = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const { subtotal, shipping, total, freeNairobi } = getCartTotals();
 
   cartCountEls.forEach((el) => (el.textContent = totalQty));
-  if (cartTotalEl) cartTotalEl.textContent = formatKES(totalAmount);
+  if (cartSubEl) cartSubEl.textContent = formatKES(subtotal);
+  if (cartShipEl) cartShipEl.textContent = shipping === 0 ? "KES 0" : formatKES(shipping);
+  if (cartTotalEl) cartTotalEl.textContent = formatKES(total);
+
+  if (freeShipNoteEl) {
+    if (!cart.length) {
+      freeShipNoteEl.style.display = "none";
+    } else if (freeNairobi) {
+      freeShipNoteEl.style.display = "block";
+      freeShipNoteEl.textContent = "Unlocked: Free Nairobi Metro delivery.";
+    } else if (deliveryZone === "nairobi") {
+      freeShipNoteEl.style.display = "block";
+      freeShipNoteEl.textContent = `Add ${formatKES(FREE_NAIROBI_THRESHOLD - subtotal)} more for free Nairobi delivery.`;
+    } else {
+      freeShipNoteEl.style.display = "none";
+    }
+  }
 
   if (!cartItemsEl) return;
 
@@ -367,11 +729,40 @@ function initCartDrawer() {
   const drawerBackdrop = document.getElementById("drawerBackdrop");
   const closeCartBtn = document.getElementById("closeCartBtn");
   const checkoutBtn = document.getElementById("checkoutWhatsappBtn");
+  const proceedCheckoutBtn = document.getElementById("proceedCheckoutBtn");
+  const backToBagBtn = document.getElementById("backToBagBtn");
+  const drawerBody = document.getElementById("cartItems");
+  const drawerFoot = document.getElementById("drawerFoot");
+  const checkoutPanel = document.getElementById("checkoutPanel");
+  const checkoutForm = document.getElementById("checkoutForm");
+  const checkoutReceipt = document.getElementById("checkoutReceipt");
+  const deliverySelect = document.getElementById("deliveryZoneSelect");
+  const drawerHeading = document.getElementById("drawerHeading");
+
+  if (deliverySelect) {
+    deliverySelect.value = deliveryZone;
+    deliverySelect.addEventListener("change", () => {
+      deliveryZone = deliverySelect.value;
+      try {
+        localStorage.setItem(DELIVERY_STORAGE_KEY, deliveryZone);
+      } catch (e) {}
+      renderCart();
+    });
+  }
+
+  const showBagStep = () => {
+    if (drawerBody) drawerBody.classList.remove("hidden");
+    if (drawerFoot) drawerFoot.classList.remove("hidden");
+    if (checkoutPanel) checkoutPanel.classList.remove("open");
+    if (drawerHeading) drawerHeading.textContent = "Order Bag";
+  };
 
   const openDrawer = () => {
+    showBagStep();
     if (cartDrawer) cartDrawer.classList.add("open");
     if (drawerBackdrop) drawerBackdrop.classList.add("open");
   };
+
   const closeDrawer = () => {
     if (cartDrawer) cartDrawer.classList.remove("open");
     if (drawerBackdrop) drawerBackdrop.classList.remove("open");
@@ -381,16 +772,80 @@ function initCartDrawer() {
   if (closeCartBtn) closeCartBtn.addEventListener("click", closeDrawer);
   if (drawerBackdrop) drawerBackdrop.addEventListener("click", closeDrawer);
 
+  if (proceedCheckoutBtn && checkoutPanel) {
+    proceedCheckoutBtn.addEventListener("click", () => {
+      if (!cart.length) {
+        showToast("Add an ingredient before checkout.");
+        return;
+      }
+      if (drawerBody) drawerBody.classList.add("hidden");
+      if (drawerFoot) drawerFoot.classList.add("hidden");
+      checkoutPanel.classList.add("open");
+      if (checkoutReceipt) checkoutReceipt.classList.remove("show");
+      if (checkoutForm) checkoutForm.style.display = "grid";
+      if (drawerHeading) drawerHeading.textContent = "Checkout";
+      const coTotal = document.getElementById("checkoutSummaryLine");
+      if (coTotal) {
+        const { total, zoneLabel } = getCartTotals();
+        coTotal.textContent = `${cart.reduce((s, i) => s + i.qty, 0)} items · ${zoneLabel} · Total ${formatKES(total)}`;
+      }
+    });
+  }
+
+  if (backToBagBtn) {
+    backToBagBtn.addEventListener("click", showBagStep);
+  }
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const orderRef = makeRef("TN-ORD");
+      const name = document.getElementById("coName").value.trim();
+      const phone = document.getElementById("coPhone").value.trim();
+      const town = document.getElementById("coLocation").value.trim();
+      const payment = document.getElementById("coPayment").value;
+      const { subtotal, shipping, total, zoneLabel } = getCartTotals();
+
+      const lines = cart.map((i) => `- ${i.name} (${i.pack}) x${i.qty} = ${formatKES(i.price * i.qty)}`);
+      const waText = encodeURIComponent(
+        `Hello Terra Naturals (Loise), Order ${orderRef}:\nCustomer: ${name} (${phone})\nDelivery: ${zoneLabel}, ${town}\nPayment: ${payment}\nItems:\n${lines.join("\n")}\nSubtotal: ${formatKES(subtotal)}\nDelivery: ${formatKES(shipping)}\nTotal: ${formatKES(total)}`
+      );
+
+      if (checkoutReceipt) {
+        checkoutReceipt.innerHTML = `
+          <strong style="display:block;font-family:var(--font-display);color:var(--forest-deep);margin-bottom:0.35rem;">✓ Order Placed (${orderRef})</strong>
+          <p style="margin:0 0 0.75rem;font-size:0.84rem;color:var(--ink);">
+            <strong>${escapeHtml(name)}</strong> · ${escapeHtml(payment)} · <strong>${formatKES(total)}</strong> (${escapeHtml(zoneLabel)}).
+          </p>
+          <div style="display:grid;gap:0.55rem;">
+            <a href="https://wa.me/254790559934?text=${waText}" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="width:100%;">Confirm on WhatsApp (+254 790 559 934)</a>
+            <button type="button" class="btn btn-soft btn-sm" id="continueShopAfterOrder" style="width:100%;">Continue Shopping</button>
+          </div>
+        `;
+        checkoutReceipt.classList.add("show");
+        const contBtn = document.getElementById("continueShopAfterOrder");
+        if (contBtn) contBtn.addEventListener("click", closeDrawer);
+      }
+
+      cart = [];
+      saveCart(cart);
+      renderCart();
+      checkoutForm.reset();
+      checkoutForm.style.display = "none";
+      showToast(`Order ${orderRef} placed.`);
+    });
+  }
+
   if (checkoutBtn) {
     checkoutBtn.addEventListener("click", () => {
       if (!cart.length) {
         showToast("Add an ingredient to send an order.");
         return;
       }
+      const { total, zoneLabel } = getCartTotals();
       const lines = cart.map((i) => `- ${i.name} (${i.pack}) x${i.qty} = ${formatKES(i.price * i.qty)}`);
-      const total = formatKES(cart.reduce((s, i) => s + i.price * i.qty, 0));
       const text = encodeURIComponent(
-        `Hello Terra Naturals (Loise), I would like to order:\n${lines.join("\n")}\nEstimated Total: ${total}\nPayment: M-Pesa / Cash on Delivery.`
+        `Hello Terra Naturals (Loise), I would like to order:\n${lines.join("\n")}\nDelivery: ${zoneLabel}\nEstimated Total: ${formatKES(total)}\nPayment: M-Pesa / Cash on Delivery.`
       );
       window.open(`https://wa.me/254790559934?text=${text}`, "_blank", "noopener");
     });
@@ -416,12 +871,113 @@ function initNavigation() {
   });
 }
 
+/* Product Quick View Modal */
+let openQuickViewFn = null;
+
+function initQuickViewModal() {
+  const backdrop = document.getElementById("quickViewBackdrop");
+  const closeBtn = document.getElementById("closeQuickViewBtn");
+  const contentEl = document.getElementById("quickViewContent");
+  const titleEl = document.getElementById("quickViewTitle");
+  const metaEl = document.getElementById("quickViewMeta");
+  if (!backdrop || !contentEl) return;
+
+  const close = () => backdrop.classList.remove("open");
+  if (closeBtn) closeBtn.addEventListener("click", close);
+  backdrop.addEventListener("click", (e) => {
+    if (e.target === backdrop) close();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && backdrop.classList.contains("open")) close();
+  });
+
+  openQuickViewFn = (product) => {
+    let selectedPackIdx = 0;
+    let qty = 1;
+
+    if (titleEl) titleEl.textContent = product.name;
+    if (metaEl) metaEl.textContent = `${product.category} · SKU ${product.sku} · INCI: ${product.inci}`;
+
+    function renderQv() {
+      const pack = product.packs[selectedPackIdx];
+      contentEl.innerHTML = `
+        <p style="margin:0;font-size:0.9rem;color:var(--muted);">${escapeHtml(product.desc)}</p>
+
+        <div class="qv-specs">
+          <div class="qv-spec">
+            <span>Grade</span>
+            <strong>${escapeHtml(product.grade)}</strong>
+          </div>
+          <div class="qv-spec">
+            <span>Phase</span>
+            <strong>${escapeHtml(product.phase)}</strong>
+          </div>
+          <div class="qv-spec">
+            <span>Typical Usage</span>
+            <strong>${escapeHtml(product.usage)}</strong>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size:0.78rem;font-weight:700;color:var(--forest-deep);margin-bottom:0.5rem;">Pack Size</div>
+          <div class="pack-pill-grid">
+            ${product.packs
+              .map(
+                (pk, i) => `
+              <button type="button" class="pack-pill ${i === selectedPackIdx ? "active" : ""}" data-pack-idx="${i}">
+                ${escapeHtml(pk.label)} · ${formatKES(pk.price)}
+              </button>`
+              )
+              .join("")}
+          </div>
+        </div>
+
+        <div class="qv-buy-row">
+          <div class="qty-stepper">
+            <button type="button" class="qty-btn" id="qvDecQty" aria-label="Decrease quantity">−</button>
+            <strong id="qvQtyVal" style="min-width:20px;text-align:center;font-size:0.9rem;">${qty}</strong>
+            <button type="button" class="qty-btn" id="qvIncQty" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="button" class="btn btn-primary" id="qvAddBtn" style="flex:1;">
+            Add to Bag · ${formatKES(pack.price * qty)}
+          </button>
+        </div>
+      `;
+
+      contentEl.querySelectorAll(".pack-pill").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          selectedPackIdx = Number(btn.dataset.packIdx);
+          renderQv();
+        });
+      });
+
+      document.getElementById("qvDecQty").addEventListener("click", () => {
+        if (qty > 1) {
+          qty -= 1;
+          renderQv();
+        }
+      });
+      document.getElementById("qvIncQty").addEventListener("click", () => {
+        qty += 1;
+        renderQv();
+      });
+      document.getElementById("qvAddBtn").addEventListener("click", () => {
+        addToCart(product, product.packs[selectedPackIdx], qty);
+        close();
+      });
+    }
+
+    renderQv();
+    backdrop.classList.add("open");
+  };
+}
+
 /* Reusable Product Card Renderer */
-function renderProductCardsInto(container, list) {
+function renderProductCardsInto(container, list, allowQuickView = false) {
   if (!list.length) {
-    container.innerHTML = `<div style="grid-column:1/-1;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);padding:1.5rem;text-align:center;">
-      <p style="margin:0 0 0.8rem;color:var(--muted);">No matches found. We stock 79+ SKUs in Nairobi.</p>
-      <a href="contact.html" class="btn btn-primary btn-sm">Ask About Stock</a>
+    container.innerHTML = `<div style="grid-column:1/-1;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);padding:2rem;text-align:center;">
+      <p style="margin:0 0 0.85rem;color:var(--muted);">No ingredients match your active filters.</p>
+      <button type="button" class="btn btn-outline btn-sm" id="inlineResetFiltersBtn">Clear Filters</button>
     </div>`;
     return;
   }
@@ -429,14 +985,26 @@ function renderProductCardsInto(container, list) {
   container.innerHTML = list
     .map((p) => {
       const options = p.packs.map((pk, i) => `<option value="${i}">${escapeHtml(pk.label)}</option>`).join("");
+      const badgeHtml = p.badge ? `<span class="product-badge-gold">${escapeHtml(p.badge)}</span>` : "";
       return `
       <article class="product-card" data-id="${p.id}">
-        <div class="product-visual">
-          <span class="product-cat-tag">${escapeHtml(p.category)}</span>
+        <div class="product-visual ${p.tone || ""}">
+          <div class="product-visual-top">
+            <span class="product-cat-tag">${escapeHtml(p.category)}</span>
+            ${badgeHtml}
+          </div>
           <span class="product-inci">${escapeHtml(p.inci)}</span>
         </div>
         <div class="product-body">
-          <h3>${escapeHtml(p.name)}</h3>
+          <div class="product-meta-row">
+            <span>${escapeHtml(p.grade)}</span>
+            <span class="stock-dot">In Stock</span>
+          </div>
+          ${
+            allowQuickView
+              ? `<button type="button" class="product-title-btn js-quick-view">${escapeHtml(p.name)}</button>`
+              : `<h3>${escapeHtml(p.name)}</h3>`
+          }
           <p class="product-desc">${escapeHtml(p.desc)}</p>
           <div class="pack-row">
             <select class="pack-select" aria-label="Select pack size for ${escapeHtml(p.name)}">
@@ -444,8 +1012,9 @@ function renderProductCardsInto(container, list) {
             </select>
             <span class="product-price">${formatKES(p.packs[0].price)}</span>
           </div>
-          <div class="product-actions">
+          <div class="product-card-actions">
             <button type="button" class="btn btn-primary add-to-cart-btn">Add to Bag</button>
+            ${allowQuickView ? `<button type="button" class="btn btn-soft js-quick-view">Details</button>` : ""}
           </div>
         </div>
       </article>`;
@@ -463,7 +1032,13 @@ function renderProductCardsInto(container, list) {
     });
 
     addBtn.addEventListener("click", () => {
-      addToCart(product, product.packs[Number(select.value)]);
+      addToCart(product, product.packs[Number(select.value)], 1);
+    });
+
+    card.querySelectorAll(".js-quick-view").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        if (openQuickViewFn) openQuickViewFn(product);
+      });
     });
   });
 }
@@ -471,82 +1046,252 @@ function renderProductCardsInto(container, list) {
 function initHomeFeatured() {
   const featuredEl = document.getElementById("homeFeaturedProducts");
   if (!featuredEl) return;
-  renderProductCardsInto(featuredEl, PRODUCTS.filter((p) => p.featured).slice(0, 4));
+  renderProductCardsInto(featuredEl, PRODUCTS.filter((p) => p.featured).slice(0, 4), false);
 }
 
+/* Full E-Commerce Shop Page Controller */
 function initShopPage() {
   const grid = document.getElementById("productsGrid");
   if (!grid) return;
 
+  initQuickViewModal();
+
+  const catListEl = document.getElementById("shopCategoryList");
   const searchInput = document.getElementById("productSearch");
-  const filterWrap = document.getElementById("categoryFilters");
   const sortSelect = document.getElementById("productSort");
+  const priceRangeInput = document.getElementById("maxPriceRange");
+  const maxPriceLabel = document.getElementById("maxPriceLabel");
+  const useCheckboxes = Array.from(document.querySelectorAll(".js-use-filter"));
+  const gradeCheckboxes = Array.from(document.querySelectorAll(".js-grade-filter"));
+  const bulkOnlyCheckbox = document.getElementById("bulkOnlyFilter");
+  const activeFiltersBar = document.getElementById("activeFiltersBar");
   const countLabel = document.getElementById("catalogCountLabel");
+  const clearAllBtn = document.getElementById("clearAllFiltersBtn");
+  const mobileFilterBtn = document.getElementById("openFiltersBtn");
+  const closeFiltersBtn = document.getElementById("closeFiltersBtn");
+  const sidebarEl = document.getElementById("shopSidebar");
 
-  let activeCat = "All";
-  let sortMode = "featured";
+  const categories = ["All", ...new Set(PRODUCTS.map((p) => p.category))];
 
+  const filterState = {
+    category: "All",
+    search: "",
+    maxPrice: 3000,
+    uses: [],
+    grades: [],
+    bulkOnly: false,
+    sort: "featured"
+  };
+
+  /* Hydrate URL Params (?cat=...&search=...) */
   const params = new URLSearchParams(window.location.search);
   const urlCat = params.get("cat");
   const urlSearch = params.get("search");
-
-  if (urlCat && filterWrap) {
-    const matchBtn = Array.from(filterWrap.querySelectorAll(".filter-btn")).find(
-      (b) => b.dataset.cat.toLowerCase() === urlCat.toLowerCase()
-    );
-    if (matchBtn) {
-      activeCat = matchBtn.dataset.cat;
-      filterWrap.querySelectorAll(".filter-btn").forEach((b) => b.classList.toggle("active", b === matchBtn));
-    }
+  if (urlCat) {
+    const found = categories.find((c) => c.toLowerCase() === urlCat.toLowerCase());
+    if (found) filterState.category = found;
   }
   if (urlSearch && searchInput) {
+    filterState.search = urlSearch;
     searchInput.value = urlSearch;
   }
 
-  function render() {
-    const q = (searchInput ? searchInput.value : "").trim().toLowerCase();
+  function renderCategoryList() {
+    if (!catListEl) return;
+    catListEl.innerHTML = categories
+      .map((cat) => {
+        const count = cat === "All" ? PRODUCTS.length : PRODUCTS.filter((p) => p.category === cat).length;
+        const active = filterState.category === cat ? "active" : "";
+        return `
+        <li>
+          <button type="button" class="cat-filter-btn ${active}" data-cat="${escapeHtml(cat)}">
+            <span>${escapeHtml(cat === "All" ? "All Ingredients" : cat)}</span>
+            <span class="cat-filter-count">${count}</span>
+          </button>
+        </li>`;
+      })
+      .join("");
+
+    catListEl.querySelectorAll(".cat-filter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filterState.category = btn.dataset.cat;
+        renderCategoryList();
+        applyAndRender();
+        if (sidebarEl) sidebarEl.classList.remove("open");
+      });
+    });
+  }
+
+  function resetAllFilters() {
+    filterState.category = "All";
+    filterState.search = "";
+    filterState.maxPrice = 3000;
+    filterState.uses = [];
+    filterState.grades = [];
+    filterState.bulkOnly = false;
+    filterState.sort = "featured";
+
+    if (searchInput) searchInput.value = "";
+    if (priceRangeInput) priceRangeInput.value = 3000;
+    if (sortSelect) sortSelect.value = "featured";
+    useCheckboxes.forEach((cb) => (cb.checked = false));
+    gradeCheckboxes.forEach((cb) => (cb.checked = false));
+    if (bulkOnlyCheckbox) bulkOnlyCheckbox.checked = false;
+
+    renderCategoryList();
+    applyAndRender();
+  }
+
+  function renderActiveChips() {
+    if (!activeFiltersBar) return;
+    const chips = [];
+    if (filterState.category !== "All") {
+      chips.push({ label: filterState.category, clear: () => { filterState.category = "All"; renderCategoryList(); } });
+    }
+    if (filterState.search.trim()) {
+      chips.push({ label: `"${filterState.search.trim()}"`, clear: () => { filterState.search = ""; if (searchInput) searchInput.value = ""; } });
+    }
+    if (filterState.maxPrice < 3000) {
+      chips.push({ label: `Up to ${formatKES(filterState.maxPrice)}`, clear: () => { filterState.maxPrice = 3000; if (priceRangeInput) priceRangeInput.value = 3000; } });
+    }
+    filterState.uses.forEach((u) => {
+      chips.push({
+        label: u,
+        clear: () => {
+          filterState.uses = filterState.uses.filter((x) => x !== u);
+          useCheckboxes.forEach((cb) => { if (cb.value === u) cb.checked = false; });
+        }
+      });
+    });
+    filterState.grades.forEach((g) => {
+      chips.push({
+        label: g,
+        clear: () => {
+          filterState.grades = filterState.grades.filter((x) => x !== g);
+          gradeCheckboxes.forEach((cb) => { if (cb.value === g) cb.checked = false; });
+        }
+      });
+    });
+    if (filterState.bulkOnly) {
+      chips.push({ label: "1kg / Bulk Packs", clear: () => { filterState.bulkOnly = false; if (bulkOnlyCheckbox) bulkOnlyCheckbox.checked = false; } });
+    }
+
+    activeFiltersBar.innerHTML = chips
+      .map(
+        (ch, i) => `
+        <span class="active-chip">
+          ${escapeHtml(ch.label)}
+          <button type="button" data-chip-idx="${i}" aria-label="Remove filter">×</button>
+        </span>`
+      )
+      .join("");
+
+    activeFiltersBar.querySelectorAll("button[data-chip-idx]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        chips[Number(btn.dataset.chipIdx)].clear();
+        applyAndRender();
+      });
+    });
+
+    if (mobileFilterBtn) {
+      mobileFilterBtn.textContent = chips.length ? `Filters (${chips.length})` : "Filters";
+    }
+  }
+
+  function applyAndRender() {
+    if (maxPriceLabel) {
+      maxPriceLabel.textContent = filterState.maxPrice >= 3000 ? "All Prices" : `Up to ${formatKES(filterState.maxPrice)}`;
+    }
+
+    const q = filterState.search.trim().toLowerCase();
     let list = PRODUCTS.filter((p) => {
-      const catOk = activeCat === "All" || p.category === activeCat;
-      const qOk =
+      const catOk = filterState.category === "All" || p.category === filterState.category;
+      const basePrice = p.packs[0].price;
+      const priceOk = filterState.maxPrice >= 3000 || basePrice <= filterState.maxPrice;
+      const useOk = !filterState.uses.length || filterState.uses.some((u) => p.useFor.includes(u));
+      const gradeOk = !filterState.grades.length || filterState.grades.includes(p.grade);
+      const bulkOk = !filterState.bulkOnly || p.packs.some((pk) => /1kg|5kg|1L|5L|24-Pack/i.test(pk.label));
+      const searchOk =
         !q ||
         p.name.toLowerCase().includes(q) ||
         p.inci.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q);
-      return catOk && qOk;
+        p.sku.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q);
+      return catOk && priceOk && useOk && gradeOk && bulkOk && searchOk;
     });
 
-    if (sortMode === "price-asc") {
+    if (filterState.sort === "price-asc") {
       list = [...list].sort((a, b) => a.packs[0].price - b.packs[0].price);
-    } else if (sortMode === "price-desc") {
+    } else if (filterState.sort === "price-desc") {
       list = [...list].sort((a, b) => b.packs[0].price - a.packs[0].price);
+    } else if (filterState.sort === "name-asc") {
+      list = [...list].sort((a, b) => a.name.localeCompare(b.name));
     }
 
     if (countLabel) {
-      countLabel.textContent = `${list.length} of ${PRODUCTS.length} featured items (79+ SKUs in Nairobi)`;
+      countLabel.textContent = `Showing ${list.length} of ${PRODUCTS.length} stocked items`;
     }
-    renderProductCardsInto(grid, list);
+
+    renderActiveChips();
+    renderProductCardsInto(grid, list, true);
+
+    const inlineReset = document.getElementById("inlineResetFiltersBtn");
+    if (inlineReset) inlineReset.addEventListener("click", resetAllFilters);
   }
 
-  if (filterWrap) {
-    filterWrap.addEventListener("click", (e) => {
-      const btn = e.target.closest(".filter-btn");
-      if (!btn) return;
-      filterWrap.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeCat = btn.dataset.cat;
-      render();
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      filterState.search = searchInput.value;
+      applyAndRender();
     });
   }
-  if (searchInput) searchInput.addEventListener("input", render);
+
   if (sortSelect) {
     sortSelect.addEventListener("change", () => {
-      sortMode = sortSelect.value;
-      render();
+      filterState.sort = sortSelect.value;
+      applyAndRender();
     });
   }
 
-  render();
+  if (priceRangeInput) {
+    priceRangeInput.addEventListener("input", () => {
+      filterState.maxPrice = Number(priceRangeInput.value);
+      applyAndRender();
+    });
+  }
+
+  useCheckboxes.forEach((cb) => {
+    cb.addEventListener("change", () => {
+      filterState.uses = useCheckboxes.filter((c) => c.checked).map((c) => c.value);
+      applyAndRender();
+    });
+  });
+
+  gradeCheckboxes.forEach((cb) => {
+    cb.addEventListener("change", () => {
+      filterState.grades = gradeCheckboxes.filter((c) => c.checked).map((c) => c.value);
+      applyAndRender();
+    });
+  });
+
+  if (bulkOnlyCheckbox) {
+    bulkOnlyCheckbox.addEventListener("change", () => {
+      filterState.bulkOnly = bulkOnlyCheckbox.checked;
+      applyAndRender();
+    });
+  }
+
+  if (clearAllBtn) clearAllBtn.addEventListener("click", resetAllFilters);
+  if (mobileFilterBtn && sidebarEl) {
+    mobileFilterBtn.addEventListener("click", () => sidebarEl.classList.add("open"));
+  }
+  if (closeFiltersBtn && sidebarEl) {
+    closeFiltersBtn.addEventListener("click", () => sidebarEl.classList.remove("open"));
+  }
+
+  renderCategoryList();
+  applyAndRender();
 }
 
 function initInciPage() {

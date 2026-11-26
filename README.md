@@ -6,7 +6,7 @@
 
 ## Multi-Page Site Map (`cleanUrls` enabled via `vercel.json`)
 1. **`index.html`** — Executive Home (Botanical Hero, Loise Nguru Credential Card, 4 Business Pillars, Featured Raw Materials, Formulation & KEBS Spotlight, Workshops & NGO Empowerment Band).
-2. **`shop.html`** — Raw Materials Store (18 interactive featured SKUs with pack sizes, category filters, INCI search, price sorting, full 17-category inventory directory, nationwide delivery & M-Pesa/COD guide).
+2. **`shop.html`** — Full E-Commerce Raw Materials Store (30 stocked SKUs across 8 categories with sticky category/price/application/grade/bulk sidebar filters, mobile filter drawer, active filter chips, Quick View specs modal with pack pills, delivery-zone calculator, and 2-step M-Pesa/COD checkout drawer with receipt & WhatsApp confirmation).
 3. **`consultancy.html`** — Formulation & KEBS/KRA/GMP Compliance Consultancy (KES 4,500 / 1.5-hr consult, Concept-to-Sample R&D, Regulatory Readiness, Formula Botanica credentials, Booking Brief form with WhatsApp confirmation, Advisory FAQ).
 4. **`workshops.html`** — Accredited 1-Day Practical Workshops (`KES 18,000`, `KES 22,500`, `KES 25,000`), Upcoming Haircare & Candle tracks, NGO & Community Economic Empowerment (`#ngo`), and Seat Reservation / NGO Proposal form.
 5. **`inci-library.html`** — Searchable & group-filterable 19-ingredient INCI Reference Library with phase/pH notes, usage rates, direct `Shop →` links into `shop.html?search=...`, and 4-Rule KEBS Labelling Checklist.

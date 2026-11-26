@@ -1495,6 +1495,11 @@ const PRODUCTS = [
   }
 ];
 
+/* Serve locally optimised, uniformly framed 800x800 product photos (sourced from terra.co.ke) */
+PRODUCTS.forEach((p) => {
+  if (p.image) p.image = `assets/products/${p.id}.jpg`;
+});
+
 /* Derive full 77-ingredient INCI Reference Library directly from stocked cosmetic SKUs */
 const INCI_DATA = PRODUCTS.filter((p) => p.category !== "Packaging").map((p) => ({
   common: p.name,
@@ -2000,6 +2005,7 @@ function renderProductCardsInto(container, list, allowQuickView = false) {
               ? `<button type="button" class="product-title-btn js-quick-view">${escapeHtml(p.name)}</button>`
               : `<h3>${escapeHtml(p.name)}</h3>`
           }
+          ${p.image ? `<span class="product-inci-body">${escapeHtml(p.inci)}</span>` : ""}
           <p class="product-desc">${escapeHtml(p.desc)}</p>
           ${
             p.outOfStock

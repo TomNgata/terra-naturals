@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Shop Cosmetic Raw Materials | Terra Naturals Kenya</title>
-  <meta name="description" content="Shop 30+ stocked cosmetic raw materials across 8 categories in Kenya: shea and mango butters, carrier and essential oils, Olivem 1000, BTMS-50, preservatives, clays, and packaging.">
+  <title>Shop 79 Cosmetic Raw Materials | Terra Naturals Kenya</title>
+  <meta name="description" content="Shop all 79 stocked cosmetic raw materials across 17 categories in Kenya: shea and mango butters, carrier and essential oils, Olivem 1000, BTMS-50, waxes, thickeners, preservatives, clays, exfoliants, surfactants, and glass packaging.">
   <link rel="icon" type="image/svg+xml" href="assets/terra-naturals-logo-primary.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,7 +82,7 @@
       </div>
     </section>
 
-    <section class="band">
+    <section class="band" id="shopCatalogTop">
       <div class="container shop-layout">
         <!-- E-Commerce Filter Sidebar -->
         <aside class="shop-sidebar" id="shopSidebar" aria-label="Product Filters">
@@ -94,10 +94,10 @@
             </div>
           </div>
 
-          <!-- Categories -->
+          <!-- Categories (All 17) -->
           <div class="filter-group">
             <div class="filter-group-head">
-              <h3>Categories</h3>
+              <h3>17 Categories</h3>
             </div>
             <ul class="cat-filter-list" id="shopCategoryList"></ul>
           </div>
@@ -108,10 +108,10 @@
               <h3>Starting Pack Price</h3>
             </div>
             <div class="price-range-meta">
-              <span style="color:var(--muted);">KES 500</span>
+              <span style="color:var(--muted);">KES 50</span>
               <strong style="color:var(--forest);" id="maxPriceLabel">All Prices</strong>
             </div>
-            <input type="range" id="maxPriceRange" class="price-range-input" min="500" max="3000" step="100" value="3000" aria-label="Maximum starting price">
+            <input type="range" id="maxPriceRange" class="price-range-input" min="50" max="2500" step="50" value="2500" aria-label="Maximum starting price">
           </div>
 
           <!-- Formulation Use -->
@@ -136,7 +136,7 @@
               <label class="check-filter-label"><input type="checkbox" class="js-grade-filter" value="ECOCERT / Natural"> ECOCERT / Natural</label>
               <label class="check-filter-label"><input type="checkbox" class="js-grade-filter" value="Unrefined"> Unrefined / Cold-Pressed</label>
               <label class="check-filter-label"><input type="checkbox" class="js-grade-filter" value="Cosmetic Grade"> Cosmetic Grade</label>
-              <label class="check-filter-label"><input type="checkbox" id="bulkOnlyFilter"> 1kg / Bulk Available</label>
+              <label class="check-filter-label"><input type="checkbox" id="bulkOnlyFilter"> 1kg / 1L+ Bulk Available</label>
             </div>
           </div>
         </aside>
@@ -148,12 +148,12 @@
               <button type="button" class="btn btn-outline btn-sm mobile-filter-btn" id="openFiltersBtn">Filters</button>
               <div class="search-box">
                 <span class="search-icon" aria-hidden="true">&#128269;</span>
-                <input type="search" id="productSearch" placeholder="Search name, INCI, or SKU…" aria-label="Search ingredients">
+                <input type="search" id="productSearch" placeholder="Search 79 SKUs or INCI…" aria-label="Search ingredients">
               </div>
             </div>
 
             <div style="display:flex;align-items:center;gap:0.75rem;">
-              <span id="catalogCountLabel" style="font-size:0.82rem;color:var(--muted);font-variant-numeric:tabular-nums;">Showing 30 items</span>
+              <span id="catalogCountLabel" style="font-size:0.82rem;color:var(--muted);font-variant-numeric:tabular-nums;">Showing 79 SKUs</span>
               <select id="productSort" class="sort-select" aria-label="Sort products">
                 <option value="featured">Sort: Featured</option>
                 <option value="price-asc">Price: Low to High</option>
@@ -170,31 +170,31 @@
       </div>
     </section>
 
-    <!-- Wholesale & 17-Category Directory -->
+    <!-- Interactive 17-Category Directory -->
     <section class="band alt">
       <div class="container">
         <div class="section-head">
-          <h2>All 17 Nairobi Stock Categories</h2>
+          <h2>Browse All 17 Stock Categories</h2>
           <a href="contact.html" class="link-subtle">Bulk 5kg+ wholesale quote →</a>
         </div>
         <div class="category-cloud">
-          <span class="cat-chip">Butters</span>
-          <span class="cat-chip">Carrier Oils</span>
-          <span class="cat-chip">Essential Oils</span>
-          <span class="cat-chip">Waxes</span>
-          <span class="cat-chip">Emulsifiers</span>
-          <span class="cat-chip">Co-Emulsifiers</span>
-          <span class="cat-chip">Hair Conditioning Emulsifiers</span>
-          <span class="cat-chip">Thickeners</span>
-          <span class="cat-chip">Preservatives</span>
-          <span class="cat-chip">Antioxidants</span>
-          <span class="cat-chip">Clays</span>
-          <span class="cat-chip">Exfoliants</span>
-          <span class="cat-chip">Skin Additives</span>
-          <span class="cat-chip">Hair Additives</span>
-          <span class="cat-chip">Surfactants</span>
-          <span class="cat-chip">Humectants</span>
-          <span class="cat-chip">Packaging</span>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Butters">Butters (4)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Carrier Oils">Carrier Oils (10)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Essential Oils">Essential Oils (7)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Emulsifiers">Emulsifiers (5)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Co-Emulsifiers">Co-Emulsifiers (3)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Conditioning Emulsifiers">Conditioning Emulsifiers (3)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Waxes">Waxes (4)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Thickeners">Thickeners (5)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Preservatives">Preservatives (6)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Antioxidants">Antioxidants (2)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Clays">Clays (8)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Exfoliants">Exfoliants (6)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Additives">Additives (5)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Hair Additives">Hair Additives (1)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Surfactants">Surfactants (6)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Humectants">Humectants (2)</button>
+          <button type="button" class="cat-chip-btn js-cat-jump" data-cat="Packaging">Packaging (2)</button>
         </div>
       </div>
     </section>

@@ -17,7 +17,7 @@
 <body>
 
   <!-- Top Contact & Shipping Bar -->
-  <div class="demo-ribbon">
+  <div class="top-ribbon">
     <div class="container">
       <div class="ribbon-tag">
         <span class="ribbon-dot"></span>
@@ -34,7 +34,7 @@
   <!-- Navigation -->
   <header class="navbar">
     <div class="container nav-inner">
-      <a href="#top" class="brand-lockup" aria-label="Terra Naturals Home">
+      <a href="index.html" class="brand-lockup" aria-label="Terra Naturals Home">
         <img src="assets/terra-naturals-logo-primary.svg" alt="Terra Naturals Logo">
         <div>
           <div class="brand-title">TERRA NATURALS</div>
@@ -43,25 +43,56 @@
       </a>
 
       <nav class="nav-links" aria-label="Primary Navigation">
-        <a href="#catalog">Raw Materials</a>
-        <a href="#consultancy">Consultancy</a>
-        <a href="#workshops">Workshops &amp; NGO</a>
-        <a href="#inci">INCI Library</a>
-        <a href="#about">About Us</a>
+        <a href="index.html" class="active">Home</a>
+        <a href="shop.html">Raw Materials</a>
+        <a href="consultancy.html">Consultancy</a>
+        <a href="workshops.html">Workshops &amp; NGO</a>
+        <a href="inci-library.html">INCI Library</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <button type="button" class="btn cart-btn" id="openCartBtn" aria-label="Open Quote Cart">
+        <button type="button" class="btn cart-btn js-open-cart" aria-label="Open Order Bag">
           <span>Order Bag</span>
-          <span class="cart-badge" id="cartCount">0</span>
+          <span class="cart-badge js-cart-count">0</span>
         </button>
-        <a href="#consultancy" class="btn btn-primary">Book Consultation</a>
+        <a href="consultancy.html" class="btn btn-primary">Book Consult</a>
+      </div>
+
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="container">
+        <nav class="mobile-nav-links" aria-label="Mobile Navigation">
+          <a href="index.html" class="active">Home</a>
+          <a href="shop.html">Raw Materials Shop (79+ SKUs)</a>
+          <a href="consultancy.html">Formulation &amp; KEBS Consultancy</a>
+          <a href="workshops.html">Workshops &amp; NGO Empowerment</a>
+          <a href="inci-library.html">INCI Reference Library</a>
+          <a href="about.html">About Terra Naturals</a>
+          <a href="contact.html">Contact &amp; Delivery</a>
+        </nav>
+        <div class="mobile-nav-actions">
+          <button type="button" class="btn cart-btn js-open-cart" style="width:100%;">
+            <span>View Order Bag</span>
+            <span class="cart-badge js-cart-count">0</span>
+          </button>
+          <a href="consultancy.html" class="btn btn-primary">Book Consultation (KES 4,500)</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <main id="top">
+  <main>
+    <!-- Hero Section -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
@@ -71,9 +102,9 @@
             Supplying 79+ cosmetic-grade raw materials nationwide alongside expert product formulation, KEBS/KRA/GMP regulatory guidance, accredited hands-on workshops, and community economic empowerment.
           </p>
           <div class="hero-cta">
-            <a href="#catalog" class="btn btn-primary">Explore 79+ Raw Materials</a>
-            <a href="#consultancy" class="btn btn-outline">Book Formulation Consult (KES 4,500)</a>
-            <a href="#workshops" class="btn btn-soft">View 1-Day Workshops</a>
+            <a href="shop.html" class="btn btn-primary">Explore 79+ Raw Materials</a>
+            <a href="consultancy.html" class="btn btn-outline">Book Formulation Consult (KES 4,500)</a>
+            <a href="workshops.html" class="btn btn-soft">View 1-Day Workshops</a>
           </div>
           <div class="trust-metrics">
             <div class="metric">
@@ -97,7 +128,7 @@
 
         <aside class="hero-card" aria-label="Founder & Brand Credentials">
           <div class="hero-logo-stage">
-            <img src="assets/terra-naturals-logo-primary.svg" alt="Terra Naturals Refreshed Vector Logo">
+            <img src="assets/terra-naturals-logo-primary.svg" alt="Terra Naturals Emblem">
           </div>
           <div class="credential-pill-row">
             <span class="pill">Formula Botanica 2019 Grad</span>
@@ -112,7 +143,7 @@
     </section>
 
     <!-- 4 Real Business Pillars -->
-    <section class="band" id="pillars">
+    <section class="band">
       <div class="container">
         <div class="section-header">
           <div>
@@ -123,272 +154,118 @@
         </div>
 
         <div class="pillars-grid">
-          <article class="pillar-card">
+          <a href="shop.html" class="pillar-card">
             <span class="pillar-num">01 / SUPPLY</span>
             <h3>Cosmetic Raw Materials</h3>
             <p>Cosmetic-grade Ghanaian &amp; Nilotica shea, mango &amp; cocoa butters, carrier &amp; essential oils, emulsifiers (Olivem 1000, BTMS-50), preservatives, clays, waxes, surfactants, and packaging.</p>
-            <div class="pillar-meta">79+ SKUs · 17 Categories · Ships Across Kenya</div>
-          </article>
+            <div class="pillar-meta">
+              <span>79+ SKUs · 17 Categories</span>
+              <span>Shop →</span>
+            </div>
+          </a>
 
-          <article class="pillar-card">
+          <a href="consultancy.html" class="pillar-card">
             <span class="pillar-num">02 / ADVISORY</span>
             <h3>Formulation &amp; KEBS Compliance</h3>
             <p>End-to-end skincare and haircare development from concept to lab sample, stability testing, formula troubleshooting, and Kenyan KEBS, KRA &amp; GMP manufacturing compliance.</p>
-            <div class="pillar-meta">KES 4,500 / 1.5-Hr Technical Consult</div>
-          </article>
+            <div class="pillar-meta">
+              <span>KES 4,500 / 1.5-Hr Consult</span>
+              <span>Book →</span>
+            </div>
+          </a>
 
-          <article class="pillar-card">
+          <a href="workshops.html" class="pillar-card">
             <span class="pillar-num">03 / ACADEMY</span>
             <h3>Accredited 1-Day Workshops</h3>
             <p>Practical lab-style training led by a Formula Botanica-approved trainer covering Body Butters &amp; Balms, Lotions &amp; Creams, Facial Cleansers, plus Haircare &amp; Candle Making.</p>
-            <div class="pillar-meta">From KES 18,000 · On-Site or Your Premises</div>
-          </article>
+            <div class="pillar-meta">
+              <span>From KES 18,000</span>
+              <span>Courses →</span>
+            </div>
+          </a>
 
-          <article class="pillar-card">
+          <a href="workshops.html#ngo" class="pillar-card">
             <span class="pillar-num">04 / IMPACT</span>
             <h3>NGO Community Empowerment</h3>
             <p>Partnering with NGOs and grassroots organizations (including Laikipia cohorts) to equip women groups and marginalized communities with income-generating cosmetic skills.</p>
-            <div class="pillar-meta">Economic Empowerment · Custom Group Curricula</div>
-          </article>
+            <div class="pillar-meta">
+              <span>Custom Group Curricula</span>
+              <span>Partner →</span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Raw Materials E-Commerce Catalog -->
-    <section class="band alt" id="catalog">
+    <!-- Featured Cosmetic Raw Materials Preview -->
+    <section class="band alt">
       <div class="container">
         <div class="section-header">
           <div>
-            <div class="eyebrow">Cosmetic Raw Materials Store</div>
-            <h2>Shop Pure Cosmetic Ingredients</h2>
+            <div class="eyebrow">Best-Selling Ingredients</div>
+            <h2>Featured Cosmetic Raw Materials</h2>
           </div>
-          <p>Browse our cosmetic-grade raw materials by category or INCI name, select your pack size, and send your order directly via WhatsApp for fast Kenya-wide dispatch.</p>
-        </div>
-
-        <div class="catalog-toolbar">
-          <div class="filter-pills" id="categoryFilters" role="tablist" aria-label="Filter ingredients by category">
-            <button type="button" class="filter-btn active" data-cat="All">All Featured (12)</button>
-            <button type="button" class="filter-btn" data-cat="Butters">Butters</button>
-            <button type="button" class="filter-btn" data-cat="Emulsifiers">Emulsifiers</button>
-            <button type="button" class="filter-btn" data-cat="Waxes & Clays">Waxes &amp; Clays</button>
-            <button type="button" class="filter-btn" data-cat="Preservatives & Actives">Preservatives &amp; Actives</button>
-            <button type="button" class="filter-btn" data-cat="Carrier Oils">Carrier Oils</button>
-          </div>
-
-          <div class="search-box">
-            <span class="search-icon" aria-hidden="true">&#128269;</span>
-            <input type="search" id="productSearch" placeholder="Search ingredient or INCI name..." aria-label="Search ingredients">
+          <div>
+            <p style="margin-bottom:0.8rem;">Add ingredients directly to your Order Bag and check out via WhatsApp or M-Pesa, or explore our full multi-category catalog.</p>
+            <a href="shop.html" class="btn btn-outline btn-sm">Browse All Raw Materials →</a>
           </div>
         </div>
 
-        <div class="products-grid" id="productsGrid"></div>
+        <div class="products-grid" id="homeFeaturedProducts"></div>
       </div>
     </section>
 
-    <!-- Formulation & Regulatory Consultancy -->
-    <section class="band" id="consultancy">
+    <!-- Formulation Consultancy & INCI Spotlight -->
+    <section class="band">
       <div class="container split-grid">
         <div>
-          <div class="eyebrow">Formulation &amp; Regulatory Advisory</div>
-          <h2 style="font-family:var(--font-display);font-size:clamp(1.7rem,3vw,2.35rem);color:var(--forest-deep);margin:0 0 0.85rem;">Turn Product Ideas Into Safe, Stable, KEBS-Ready Brands</h2>
-          <p style="color:var(--muted);margin:0 0 1.25rem;">
-            Whether you are formulating a new natural skincare line from scratch or fixing separation, preservation, or compliance hurdles in an existing product, Loise Nguru provides confidential, science-backed guidance.
+          <div class="eyebrow">Science-Backed Brand Building</div>
+          <h2 style="font-family:var(--font-display);font-size:clamp(1.65rem,2.9vw,2.25rem);color:var(--forest-deep);margin:0 0 0.8rem;">Turn Product Ideas Into Safe, Stable, KEBS-Ready Brands</h2>
+          <p style="color:var(--muted);margin:0 0 1.2rem;">
+            Led by <strong>Loise Nguru</strong> (Formula Botanica 2019 Graduate with 9+ accredited diplomas and certificates), our advisory sessions help Kenyan beauty founders perfect their emulsions, verify preservation, and meet KEBS, KRA, and GMP standards.
           </p>
 
           <div class="price-callout">
             <div>
-              <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--forest-soft);">Technical Consultation Session</div>
-              <strong>KES 4,500</strong> <span style="font-size:0.9rem;color:var(--muted);">for up to 1.5 hours</span>
+              <div style="font-size:0.76rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--forest-soft);">1-on-1 Technical Consultation</div>
+              <strong>KES 4,500</strong> <span style="font-size:0.88rem;color:var(--muted);">for up to 1.5 hours</span>
             </div>
-            <span class="pill" style="background:#fff;">Custom Formulation Quoted by Complexity</span>
+            <a href="consultancy.html" class="btn btn-primary btn-sm">Book Session →</a>
           </div>
 
-          <ul class="checklist">
-            <li><span class="check-icon">&#10003;</span><span><strong>Concept-to-Sample Formulation:</strong> Custom facial, body, and haircare recipes developed and bench-tested to commercial grade.</span></li>
-            <li><span class="check-icon">&#10003;</span><span><strong>Stability &amp; Preservation Troubleshooting:</strong> Fix emulsion separation, viscosity drift, pH imbalance, and microbial shelf-life issues.</span></li>
-            <li><span class="check-icon">&#10003;</span><span><strong>KEBS, KRA &amp; GMP Readiness:</strong> Practical navigation of Kenyan cosmetic labelling, INCI compliance, and Good Manufacturing Practices.</span></li>
-          </ul>
-
-          <h3 style="font-family:var(--font-display);font-size:0.92rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--forest);margin:1.5rem 0 0.5rem;">Verified Founder Credentials — Loise Nguru</h3>
-          <div class="credentials-grid">
-            <div class="cred-chip">Advanced Diploma in Organic Cosmetic Science<span>Formula Botanica · 2018</span></div>
-            <div class="cred-chip">Int’l Organic Skincare Entrepreneur Program<span>Formula Botanica Graduate · 2019</span></div>
-            <div class="cred-chip">Diploma in Organic Skincare Formulation<span>Includes Cosmetic Compliance &amp; Skills</span></div>
-            <div class="cred-chip">Preservation, Stability &amp; Anti-Ageing Certs<span>Plus Facial Masque &amp; Chocolate Spa Therapy</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:0.75rem;">
+            <a href="consultancy.html" class="btn btn-outline">Explore Consultancy Services</a>
+            <a href="inci-library.html" class="btn btn-soft">Open INCI Ingredient Library</a>
           </div>
         </div>
 
-        <div class="consult-card">
-          <h3 style="font-family:var(--font-display);font-size:1.3rem;color:var(--forest-deep);margin:0 0 0.35rem;">Request a Consultation or Custom Formula</h3>
-          <p style="font-size:0.88rem;color:var(--muted);margin:0 0 1.25rem;">Select your service below to generate an instant WhatsApp or email booking brief for Loise Nguru.</p>
-
-          <form id="consultForm" class="form-grid">
-            <div class="form-row-2">
-              <div class="field">
-                <label for="cName">Your Full Name</label>
-                <input type="text" id="cName" required placeholder="e.g. Wanjiku Kamau">
-              </div>
-              <div class="field">
-                <label for="cPhone">Phone / WhatsApp</label>
-                <input type="tel" id="cPhone" required placeholder="+254 7XX XXX XXX">
-              </div>
-            </div>
-
-            <div class="field">
-              <label for="cService">Consultancy / Service Type</label>
-              <select id="cService">
-                <option value="Technical Consultation (KES 4,500 / 1.5 hrs)">Technical Consultation — KES 4,500 (1.5 hrs)</option>
-                <option value="Custom Concept-to-Sample Formulation">Custom Concept-to-Sample Formulation</option>
-                <option value="Formula Troubleshooting & Stability Testing">Formula Troubleshooting &amp; Stability Testing</option>
-                <option value="KEBS / KRA / GMP Compliance Advisory">KEBS / KRA / GMP Regulatory Compliance</option>
-                <option value="NGO / Women Group Training Partnership">NGO / Community Empowerment Partnership</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="cNotes">Tell us about your product or goals</label>
-              <textarea id="cNotes" rows="4" required placeholder="e.g. Launching a natural shea &amp; baobab body lotion and need stability testing + KEBS labelling guidance..."></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary" style="width:100%;">Confirm Booking Request</button>
-            <p style="font-size:0.78rem;color:var(--muted);margin:0;text-align:center;">
-              Direct line: <strong>+254 790 559 934</strong> · <strong>terra@terra.co.ke</strong>
-            </p>
-          </form>
+        <div class="brand-showcase-box">
+          <span class="eyebrow" style="margin-bottom:0.85rem;">Why Makers Choose Terra Naturals</span>
+          <h3 style="font-family:var(--font-display);color:var(--forest);margin:0 0 0.5rem;">Rooted in Nature, Backed by Science</h3>
+          <ul class="checklist" style="margin-bottom:1.15rem;">
+            <li><span class="check-icon">&#10003;</span><span><strong>Cosmetic-Grade Purity:</strong> Unrefined Ghanaian &amp; Nilotica shea, mango butter, cold-pressed oils, and ECOCERT-approved emulsifiers.</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>Flexible Maker Packs:</strong> Order from 100g test packs up to 5kg+ commercial bulk with fast nationwide Kenya shipping.</span></li>
+            <li><span class="check-icon">&#10003;</span><span><strong>KEBS &amp; INCI Clarity:</strong> Every ingredient comes with accurate INCI nomenclature and technical guidance.</span></li>
+          </ul>
+          <a href="about.html" class="btn btn-outline btn-sm">Read Loise Nguru’s Story →</a>
         </div>
       </div>
     </section>
 
-    <!-- Workshops & NGO Economic Empowerment -->
-    <section class="band forest-band" id="workshops">
+    <!-- Workshops & NGO CTA Band -->
+    <section class="band forest-band">
       <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="eyebrow" style="background:rgba(255,255,255,0.14);color:#fff;border-color:rgba(255,255,255,0.22);">Hands-On Cosmetic Academy</div>
-            <h2>Accredited 1-Day Workshops &amp; Community Empowerment</h2>
-          </div>
-          <p>Practical formulation training held at our Kiambu Road Nairobi studio or delivered directly at your organisation’s premises.</p>
-        </div>
-
-        <div class="workshop-grid">
-          <article class="workshop-card">
-            <span class="workshop-badge">1-Day Practical · In-Studio</span>
-            <h3>Body Butters, Balms &amp; Salves</h3>
-            <div class="workshop-price">KES 18,000</div>
-            <p>Master anhydrous formulation using African shea, mango &amp; cocoa butters, beeswax ratios, antioxidant stabilization, and texture control.</p>
-            <button type="button" class="btn btn-white enroll-btn" data-course="Body Butters, Balms & Salves (KES 18,000)">Reserve a Seat</button>
-          </article>
-
-          <article class="workshop-card">
-            <span class="workshop-badge">1-Day Practical · Most Popular</span>
-            <h3>Lotions, Creams &amp; Moisturisers</h3>
-            <div class="workshop-price">KES 22,500</div>
-            <p>Learn oil-in-water emulsion science with Olivem 1000 &amp; Polawax, pH balancing, broad-spectrum natural preservation (Geogard ECT), and stability checks.</p>
-            <button type="button" class="btn btn-white enroll-btn" data-course="Lotions, Creams & Moisturisers (KES 22,500)">Reserve a Seat</button>
-          </article>
-
-          <article class="workshop-card">
-            <span class="workshop-badge">1-Day Practical · Advanced</span>
-            <h3>Facial Cleansers &amp; Botanical Washes</h3>
-            <div class="workshop-price">KES 25,000</div>
-            <p>Formulate gentle, sulfate-free foaming cleansers, cream cleansers, and micellar gels tailored for African skin types—plus Haircare &amp; Candle Making tracks launching soon.</p>
-            <button type="button" class="btn btn-white enroll-btn" data-course="Facial Cleansers Workshop (KES 25,000)">Reserve a Seat</button>
-          </article>
-        </div>
-
         <div class="ngo-banner">
           <div>
-            <div class="eyebrow" style="background:rgba(253,230,138,0.18);color:#FDE68A;border-color:rgba(253,230,138,0.3);margin-bottom:0.75rem;">Economic &amp; Community Empowerment</div>
-            <h3>Partnering with NGOs &amp; County Groups Across Kenya</h3>
+            <div class="eyebrow dark" style="margin-bottom:0.8rem;">Academy &amp; Economic Empowerment</div>
+            <h3>Hands-On 1-Day Workshops &amp; NGO Training Across Kenya</h3>
             <p>
-              From rural Laikipia women’s cooperatives to youth enterprise incubators, Terra Naturals delivers tailored on-site cosmetic formulation and value-addition programs that turn local botanicals into sustainable household incomes.
+              Join our practical Nairobi studio workshops in Body Butters (KES 18,000), Lotions &amp; Creams (KES 22,500), and Facial Cleansers (KES 25,000)—or partner with Terra Naturals to train women cooperatives and youth groups anywhere in Kenya.
             </p>
           </div>
           <div style="display:flex;flex-direction:column;gap:0.75rem;">
-            <a href="#consultancy" class="btn btn-white">Request an NGO Training Proposal</a>
-            <span style="font-size:0.8rem;color:rgba(255,255,255,0.78);text-align:center;">On-site delivery anywhere in Kenya · Custom group pricing</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Searchable INCI Ingredient Database -->
-    <section class="band alt" id="inci">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="eyebrow">Formulator Knowledge Base</div>
-            <h2>INCI &amp; Ingredient Reference Library</h2>
-          </div>
-          <p>Quickly look up International Nomenclature of Cosmetic Ingredients (INCI) names, skin functions, and recommended usage rates for KEBS-compliant product labelling.</p>
-        </div>
-
-        <div class="catalog-toolbar" style="margin-bottom:1rem;">
-          <div class="search-box" style="min-width:min(360px,100%);">
-            <span class="search-icon" aria-hidden="true">&#128269;</span>
-            <input type="search" id="inciSearch" placeholder="Search by common name, INCI, or function..." aria-label="Search INCI database">
-          </div>
-          <span style="font-size:0.85rem;color:var(--muted);" id="inciCount">Showing 10 core cosmetic ingredients</span>
-        </div>
-
-        <div class="inci-wrap">
-          <div style="overflow-x:auto;">
-            <table class="inci-table">
-              <thead>
-                <tr>
-                  <th>Common Name</th>
-                  <th>INCI Name</th>
-                  <th>Function &amp; Usage Notes</th>
-                  <th>Typical Usage</th>
-                </tr>
-              </thead>
-              <tbody id="inciBody"></tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Terra Naturals & Quality Promise -->
-    <section class="band" id="about">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <div class="eyebrow">Our Story &amp; Quality Promise</div>
-            <h2>Why Kenyan Cosmetic Brands Choose Terra Naturals</h2>
-          </div>
-          <p>Founded in 2017 by Formula Botanica graduate Loise Nguru, Terra Naturals bridges authentic botanical sourcing with international cosmetic science.</p>
-        </div>
-
-        <div class="audit-grid">
-          <div class="brand-showcase-box">
-            <h3 style="font-family:var(--font-display);color:var(--forest);margin:0 0 0.5rem;">Rooted in Nature, Backed by Science</h3>
-            <p style="font-size:0.9rem;color:var(--muted);margin:0 0 1rem;">
-              Every butter, carrier oil, emulsifier, and preservative in our Kiambu Road studio is carefully vetted for purity, cosmetic grade, and consistency—so Kenyan formulators can create world-class skincare and haircare with confidence.
-            </p>
-            <div class="logo-pair">
-              <div class="logo-tile light">
-                <img src="assets/terra-naturals-logo-primary.svg" alt="Terra Naturals Emblem">
-                <span>100% Cosmetic-Grade Sourcing</span>
-              </div>
-              <div class="logo-tile dark">
-                <img src="assets/terra-naturals-logo-reversed.svg" alt="Terra Naturals Emblem">
-                <span>Formula Botanica Trained</span>
-              </div>
-            </div>
-            <p style="font-size:0.84rem;color:var(--muted);margin:0;">
-              Visit us along Kiambu Road, Nairobi, or order online for reliable delivery across all 47 counties in Kenya.
-            </p>
-          </div>
-
-          <div class="brand-showcase-box" style="background:var(--white);">
-            <h3 style="font-family:var(--font-display);color:var(--forest);margin:0 0 0.5rem;">The Terra Naturals Standard</h3>
-            <ul class="checklist" style="margin-bottom:0;">
-              <li><span class="check-icon">&#10003;</span><span><strong>Authentic African &amp; Global Botanicals:</strong> Unrefined Ghanaian &amp; Nilotica shea, mango butter, cold-pressed oils, and ECOCERT-approved emulsifiers.</span></li>
-              <li><span class="check-icon">&#10003;</span><span><strong>End-to-End Maker Support:</strong> Buy ingredients in flexible pack sizes from 100g samples to 5kg bulk, paired with real technical guidance.</span></li>
-              <li><span class="check-icon">&#10003;</span><span><strong>KEBS &amp; GMP Ready:</strong> Accurate INCI documentation and regulatory guidance to help your brand reach retail shelves smoothly.</span></li>
-              <li><span class="check-icon">&#10003;</span><span><strong>Nationwide Convenience:</strong> Fast dispatch across Kenya with flexible M-Pesa and Cash on Delivery payment options.</span></li>
-            </ul>
+            <a href="workshops.html" class="btn btn-white">Explore Workshops &amp; Syllabus</a>
+            <a href="workshops.html#ngo" class="btn btn-outline-light">Request NGO Proposal</a>
           </div>
         </div>
       </div>
@@ -401,13 +278,13 @@
       <div class="footer-grid">
         <div>
           <div class="brand-lockup" style="margin-bottom:0.85rem;">
-            <img src="assets/terra-naturals-logo-reversed.svg" alt="Terra Naturals Reversed Logo" style="width:52px;height:52px;">
+            <img src="assets/terra-naturals-logo-reversed.svg" alt="Terra Naturals Emblem" style="width:50px;height:50px;">
             <div>
               <div class="brand-title" style="color:#fff;">TERRA NATURALS</div>
               <div class="brand-sub" style="color:rgba(255,255,255,0.72);">Empowering Natural Beauty Innovation</div>
             </div>
           </div>
-          <p style="font-size:0.86rem;margin:0;color:rgba(255,255,255,0.78);">
+          <p style="font-size:0.85rem;margin:0;color:rgba(255,255,255,0.78);">
             Founded in 2017 by Loise Nguru. Cosmetic raw materials, product formulation consultancy, Formula Botanica-accredited training, and community empowerment in Nairobi, Kenya.
           </p>
         </div>
@@ -415,10 +292,20 @@
         <div>
           <h4>Explore</h4>
           <ul>
-            <li><a href="#catalog">Raw Materials Shop (79+ SKUs)</a></li>
-            <li><a href="#consultancy">Formulation &amp; KEBS Consultancy</a></li>
-            <li><a href="#workshops">1-Day Practical Workshops</a></li>
-            <li><a href="#inci">INCI Ingredient Library</a></li>
+            <li><a href="shop.html">Raw Materials Shop (79+ SKUs)</a></li>
+            <li><a href="consultancy.html">Formulation &amp; KEBS Consultancy</a></li>
+            <li><a href="workshops.html">1-Day Practical Workshops</a></li>
+            <li><a href="inci-library.html">INCI Ingredient Library</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Loise Nguru</a></li>
+            <li><a href="workshops.html#ngo">NGO Empowerment Programs</a></li>
+            <li><a href="contact.html">Contact &amp; Nationwide Shipping</a></li>
+            <li><a href="https://formulabotanica.com/portfolio/terra-naturals/" target="_blank" rel="noopener">Formula Botanica Portfolio</a></li>
           </ul>
         </div>
 
@@ -428,17 +315,7 @@
             <li><a href="tel:+254790559934">+254 790 559 934</a></li>
             <li><a href="mailto:terra@terra.co.ke">terra@terra.co.ke</a></li>
             <li>Kiambu Road, Nairobi, Kenya</li>
-            <li>Nationwide Delivery · Cash on Delivery</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Connect</h4>
-          <ul>
-            <li><a href="https://terra.co.ke" target="_blank" rel="noopener">terra.co.ke</a></li>
             <li><a href="https://www.instagram.com/terranaturalskenya/" target="_blank" rel="noopener">Instagram (@terranaturalskenya)</a></li>
-            <li><a href="https://www.linkedin.com/company/terra-kenya/" target="_blank" rel="noopener">LinkedIn (Terra Naturals Kenya)</a></li>
-            <li><a href="https://formulabotanica.com/portfolio/terra-naturals/" target="_blank" rel="noopener">Formula Botanica Portfolio</a></li>
           </ul>
         </div>
       </div>
@@ -450,12 +327,12 @@
     </div>
   </footer>
 
-  <!-- Interactive Order Bag Drawer -->
+  <!-- Persistent Order Bag Drawer -->
   <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-label="Raw Materials Order Bag">
     <div class="drawer-head">
       <h3>Your Raw Materials Bag</h3>
-      <button type="button" class="btn btn-soft" id="closeCartBtn" style="padding:0.4rem 0.85rem;font-size:0.8rem;">Close</button>
+      <button type="button" class="btn btn-soft btn-sm" id="closeCartBtn">Close</button>
     </div>
     <div class="drawer-body" id="cartItems"></div>
     <div class="drawer-foot">
@@ -471,7 +348,6 @@
   </aside>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
   <script src="app.js"></script>
 </body>
 </html>

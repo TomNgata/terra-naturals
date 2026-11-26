@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>INCI &amp; Cosmetic Ingredient Reference Library — Terra Naturals Kenya</title>
+  <meta name="description" content="Searchable INCI ingredient database for Kenyan cosmetic formulators. Look up Latin botanical names, functions, processing phases, pH notes, and recommended usage percentages for KEBS labelling.">
+  <link rel="icon" type="image/svg+xml" href="assets/terra-naturals-logo-primary.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="top-ribbon">
+    <div class="container">
+      <div class="ribbon-tag">
+        <span class="ribbon-dot"></span>
+        <span>Formulator Knowledge Base · KEBS-Compliant INCI Nomenclature Reference</span>
+      </div>
+      <div class="ribbon-links">
+        <a href="tel:+254790559934">+254 790 559 934</a>
+        <a href="mailto:terra@terra.co.ke">terra@terra.co.ke</a>
+        <span>Kiambu Road, Nairobi</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand-lockup" aria-label="Terra Naturals Home">
+        <img src="assets/terra-naturals-logo-primary.svg" alt="Terra Naturals Logo">
+        <div>
+          <div class="brand-title">TERRA NATURALS</div>
+          <div class="brand-sub">Ingredients · Formulation · Training</div>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="index.html">Home</a>
+        <a href="shop.html">Raw Materials</a>
+        <a href="consultancy.html">Consultancy</a>
+        <a href="workshops.html">Workshops &amp; NGO</a>
+        <a href="inci-library.html" class="active">INCI Library</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="btn cart-btn js-open-cart" aria-label="Open Order Bag">
+          <span>Order Bag</span>
+          <span class="cart-badge js-cart-count">0</span>
+        </button>
+        <a href="consultancy.html" class="btn btn-primary">Book Consult</a>
+      </div>
+
+      <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle Menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <div class="container">
+        <nav class="mobile-nav-links" aria-label="Mobile Navigation">
+          <a href="index.html">Home</a>
+          <a href="shop.html">Raw Materials Shop (79+ SKUs)</a>
+          <a href="consultancy.html">Formulation &amp; KEBS Consultancy</a>
+          <a href="workshops.html">Workshops &amp; NGO Empowerment</a>
+          <a href="inci-library.html" class="active">INCI Reference Library</a>
+          <a href="about.html">About Terra Naturals</a>
+          <a href="contact.html">Contact &amp; Delivery</a>
+        </nav>
+        <div class="mobile-nav-actions">
+          <button type="button" class="btn cart-btn js-open-cart" style="width:100%;">
+            <span>View Order Bag</span>
+            <span class="cart-badge js-cart-count">0</span>
+          </button>
+          <a href="consultancy.html" class="btn btn-primary">Book Consultation (KES 4,500)</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <div class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span>/</span>
+            <span>INCI Reference Library</span>
+          </div>
+          <div class="eyebrow dark">Formulator Technical Guide</div>
+          <h1>INCI &amp; Ingredient <span>Reference Library.</span></h1>
+          <p class="page-hero-lead">
+            Look up International Nomenclature of Cosmetic Ingredients (INCI) names, phase/pH requirements, and recommended usage percentages to prepare accurate, KEBS-compliant product labels.
+          </p>
+        </div>
+        <div class="hero-summary-card">
+          <strong>Need a Full KEBS Label Review?</strong>
+          <p>Book a 1.5-hour technical consultation with Loise Nguru to verify your formula percentages, allergen disclosures, and packaging claims before printing.</p>
+          <a href="consultancy.html" class="btn btn-white btn-sm" style="margin-top:0.8rem;">Book Label Review</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Searchable INCI Table -->
+    <section class="band">
+      <div class="container">
+        <div class="catalog-toolbar">
+          <div class="filter-pills" id="inciGroupFilters" role="tablist" aria-label="Filter INCI by ingredient group">
+            <button type="button" class="filter-btn active" data-group="All">All Groups (19)</button>
+            <button type="button" class="filter-btn" data-group="Butters & Oils">Butters &amp; Oils</button>
+            <button type="button" class="filter-btn" data-group="Emulsifiers">Emulsifiers</button>
+            <button type="button" class="filter-btn" data-group="Preservatives & Actives">Preservatives &amp; Actives</button>
+            <button type="button" class="filter-btn" data-group="Waxes, Clays & Surfactants">Waxes, Clays &amp; Surfactants</button>
+          </div>
+
+          <div class="search-box" style="min-width:min(320px,100%);">
+            <span class="search-icon" aria-hidden="true">&#128269;</span>
+            <input type="search" id="inciSearch" placeholder="Search common name, INCI, or pH…" aria-label="Search INCI library">
+          </div>
+        </div>
+
+        <p id="inciCount" style="font-size:0.84rem;color:var(--muted);margin:0 0 1rem;">Showing 19 cosmetic ingredients</p>
+
+        <div class="inci-wrap">
+          <div style="overflow-x:auto;">
+            <table class="inci-table">
+              <thead>
+                <tr>
+                  <th>Common Name</th>
+                  <th>INCI Name</th>
+                  <th>Function &amp; Processing Notes</th>
+                  <th>Typical Usage</th>
+                  <th>Stock</th>
+                </tr>
+              </thead>
+              <tbody id="inciBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEBS INCI Labelling Essentials -->
+    <section class="band alt">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Regulatory Readiness</div>
+            <h2>4 Rules for KEBS-Compliant Cosmetic Ingredient Labels</h2>
+          </div>
+          <p>Preparing clean, internationally standardized labels builds retailer trust and speeds up KEBS certification in Kenya.</p>
+        </div>
+
+        <div class="grid-4">
+          <article class="pillar-card">
+            <span class="pillar-num">RULE 01</span>
+            <h3>Descending Weight Order</h3>
+            <p>List all ingredients present above 1% in strict descending order of percentage by weight in the finished formula (usually starting with <em>Aqua</em> for lotions).</p>
+          </article>
+          <article class="pillar-card">
+            <span class="pillar-num">RULE 02</span>
+            <h3>Use Official INCI Names</h3>
+            <p>Botanicals must use standardized Latin binomials (e.g., <em>Butyrospermum Parkii Butter</em> instead of simply writing "Shea Butter").</p>
+          </article>
+          <article class="pillar-card">
+            <span class="pillar-num">RULE 03</span>
+            <h3>Expand Multi-Part Blends</h3>
+            <p>Pre-blended preservatives and emulsifiers (like Geogard ECT or Olivem 1000) must have every constituent INCI component listed individually.</p>
+          </article>
+          <article class="pillar-card">
+            <span class="pillar-num">RULE 04</span>
+            <h3>Batch Code &amp; Shelf Life</h3>
+            <p>Include batch/lot number, net weight/volume, manufacturer address in Kenya, usage precautions, and expiry or PAO symbol.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand-lockup" style="margin-bottom:0.85rem;">
+            <img src="assets/terra-naturals-logo-reversed.svg" alt="Terra Naturals Emblem" style="width:50px;height:50px;">
+            <div>
+              <div class="brand-title" style="color:#fff;">TERRA NATURALS</div>
+              <div class="brand-sub" style="color:rgba(255,255,255,0.72);">Empowering Natural Beauty Innovation</div>
+            </div>
+          </div>
+          <p style="font-size:0.85rem;margin:0;color:rgba(255,255,255,0.78);">
+            Founded in 2017 by Loise Nguru. Cosmetic raw materials, product formulation consultancy, Formula Botanica-accredited training, and community empowerment in Nairobi, Kenya.
+          </p>
+        </div>
+
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="shop.html">Raw Materials Shop (79+ SKUs)</a></li>
+            <li><a href="consultancy.html">Formulation &amp; KEBS Consultancy</a></li>
+            <li><a href="workshops.html">1-Day Practical Workshops</a></li>
+            <li><a href="inci-library.html">INCI Ingredient Library</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Loise Nguru</a></li>
+            <li><a href="workshops.html#ngo">NGO Empowerment Programs</a></li>
+            <li><a href="contact.html">Contact &amp; Nationwide Shipping</a></li>
+            <li><a href="https://formulabotanica.com/portfolio/terra-naturals/" target="_blank" rel="noopener">Formula Botanica Portfolio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact Terra Naturals</h4>
+          <ul>
+            <li><a href="tel:+254790559934">+254 790 559 934</a></li>
+            <li><a href="mailto:terra@terra.co.ke">terra@terra.co.ke</a></li>
+            <li>Kiambu Road, Nairobi, Kenya</li>
+            <li><a href="https://www.instagram.com/terranaturalskenya/" target="_blank" rel="noopener">Instagram (@terranaturalskenya)</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 Terra Naturals Kenya. All rights reserved.</span>
+        <span>Kiambu Road, Nairobi · Empowering Natural Beauty Innovation</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Raw Materials Order Bag">
+    <div class="drawer-head">
+      <h3>Your Raw Materials Bag</h3>
+      <button type="button" class="btn btn-soft btn-sm" id="closeCartBtn">Close</button>
+    </div>
+    <div class="drawer-body" id="cartItems"></div>
+    <div class="drawer-foot">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.85rem;">
+        <span style="font-weight:600;color:var(--muted);">Estimated Subtotal</span>
+        <strong style="font-family:var(--font-display);font-size:1.25rem;color:var(--forest);" id="cartTotal">KES 0</strong>
+      </div>
+      <p style="font-size:0.78rem;color:var(--muted);margin:0 0 0.85rem;">
+        Ships nationwide across Kenya. Pay via <strong>M-Pesa</strong> or <strong>Cash on Delivery</strong> upon confirmation with Terra Naturals.
+      </p>
+      <button type="button" class="btn btn-primary" id="checkoutWhatsappBtn" style="width:100%;">Send Order via WhatsApp (+254 790 559 934)</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>

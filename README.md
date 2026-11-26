@@ -1,18 +1,18 @@
-# Terra Naturals — Brand Revival & 4-Pillar Web Demo
+# Terra Naturals Kenya — Multi-Page Cosmetic Ingredients, Consultancy & Academy Website
 
-> **Deployment Target:** Dedicated GitHub repository (via GitHub MCP) → Vercel live demo link for **Loise Nguru** & **Stanley Nguru**.
-> **Brand Credit:** Refreshed identity based on the logo proposal by **Rotaractor Anita** (University of Nairobi), upgraded to crisp production SVGs.
-> **Live Reference Domain:** `terra.co.ke` (Founded 2017, Nairobi / Kiambu Road · `+254 790 559934` · `terra@terra.co.ke`).
+> **Live Deployment:** `terra-naturals.vercel.app` (connected to `TomNgata/terra-naturals`).
+> **Brand Credit (Internal Note):** Refreshed identity based on the logo proposal by **Rotaractor Anita** (University of Nairobi), upgraded to crisp production SVGs.
+> **Founder & Reference Domain:** Founded in 2017 by **Loise Nguru** (`terra.co.ke`, Kiambu Road, Nairobi · `+254 790 559 934` · `terra@terra.co.ke`).
 
-## Verified Brand System (Credit: Rtr. Anita)
-- **Deep Forest Green:** `#1A4D3A`
-- **Pure White:** `#FFFFFF`
-- **Warm Paper Surface:** `#F6F3EA`
-- **Typography:** Montserrat Bold (Headings/Brand) + clean modern sans body
-- **Logo Concept:** Circle (Earth / "Terra") + Two Leaves (Vitality / "Naturals") + Bold Wordmark (recreated as crisp primary & reversed SVGs).
+## Multi-Page Site Map (`cleanUrls` enabled via `vercel.json`)
+1. **`index.html`** — Executive Home (Botanical Hero, Loise Nguru Credential Card, 4 Business Pillars, Featured Raw Materials, Formulation & KEBS Spotlight, Workshops & NGO Empowerment Band).
+2. **`shop.html`** — Raw Materials Store (18 interactive featured SKUs with pack sizes, category filters, INCI search, price sorting, full 17-category inventory directory, nationwide delivery & M-Pesa/COD guide).
+3. **`consultancy.html`** — Formulation & KEBS/KRA/GMP Compliance Consultancy (KES 4,500 / 1.5-hr consult, Concept-to-Sample R&D, Regulatory Readiness, Formula Botanica credentials, Booking Brief form with WhatsApp confirmation, Advisory FAQ).
+4. **`workshops.html`** — Accredited 1-Day Practical Workshops (`KES 18,000`, `KES 22,500`, `KES 25,000`), Upcoming Haircare & Candle tracks, NGO & Community Economic Empowerment (`#ngo`), and Seat Reservation / NGO Proposal form.
+5. **`inci-library.html`** — Searchable & group-filterable 19-ingredient INCI Reference Library with phase/pH notes, usage rates, direct `Shop →` links into `shop.html?search=...`, and 4-Rule KEBS Labelling Checklist.
+6. **`about.html`** — Brand Heritage, Founder **Loise Nguru's** story, full 9+ Formula Botanica diploma & certificate showcase, and Terra Naturals Sourcing Standard.
+7. **`contact.html`** — Kiambu Road Studio contact channels, nationwide 47-county delivery & M-Pesa/COD guide, and bulk/general inquiry form.
 
-## Verified 4-Pillar Business Architecture (from `terra.co.ke` & Formula Botanica)
-1. **Cosmetic Raw Materials Store (79+ SKUs across 17 Categories):** Butters (Ghanaian & Nilotica Shea, Mango, Cocoa), Carrier & Essential Oils, Waxes, Emulsifiers, Preservatives, Clays, Thickeners, Surfactants, Humectants, Additives & Packaging. Nationwide Kenya shipping.
-2. **Formulation & KEBS/KRA/GMP Compliance Consultancy:** Concept-to-sample formulation, stability testing, formula troubleshooting (`KES 4,500` for up to 1.5 hrs + formulation fees), backed by Loise Nguru's 9+ Formula Botanica diplomas/certificates.
-3. **Accredited 1-Day Workshops & Training:** Body Butters/Balms/Salves (`KES 18,000`), Lotions/Creams/Moisturisers (`KES 22,500`), Facial Cleansers (`KES 25,000`), plus Hair & Candle Making courses.
-4. **Economic & Community Empowerment:** NGO partnerships training women groups and marginalized communities (e.g., Laikipia outreach), plus a cleaned, searchable **INCI Ingredient Library**.
+## Persistent Cross-Page Features
+- **Order Bag (`localStorage`):** Items added on `/` or `/shop` persist across all 7 pages with quantity +/- controls, live subtotal, and one-click WhatsApp order checkout (`+254 790 559 934`).
+- **Mobile Navigation Drawer:** Clean responsive hamburger menu across all 7 pages.

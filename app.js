@@ -1500,6 +1500,9 @@ PRODUCTS.forEach((p) => {
   if (p.image) p.image = `assets/products/${p.id}.jpg`;
 });
 
+/* Order catalog so all SKUs with product photos appear first while preserving relative order */
+PRODUCTS.sort((a, b) => Number(Boolean(b.image)) - Number(Boolean(a.image)));
+
 /* Derive full 77-ingredient INCI Reference Library directly from stocked cosmetic SKUs */
 const INCI_DATA = PRODUCTS.filter((p) => p.category !== "Packaging").map((p) => ({
   common: p.name,
